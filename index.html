@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fed Aura — Powered by Red Hat OpenShift AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0A0A0C;--surface:#111113;--surface2:#18181B;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--rh-red:#EE0000;--text:#EEEEE8;--muted:#7A7A74;--dim:#3A3A36}
+html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;overflow:hidden;user-select:none}
+#app{display:flex;flex-direction:column;height:100vh}
+#header{display:flex;align-items:center;justify-content:space-between;padding:16px 44px;border-bottom:1px solid var(--border);flex-shrink:0;position:relative}
+.brand{display:flex;align-items:baseline;gap:14px}
+.fed-logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;letter-spacing:-0.5px}
+.fed-logo .fed{color:var(--rh-red)}.fed-logo .aura{color:var(--text)}
+.rh-pill{font-size:11px;font-weight:400;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);padding:3px 10px;border:1px solid var(--border2);border-radius:20px}
+.rh-dot{width:6px;height:6px;border-radius:50%;background:var(--rh-red);display:inline-block;margin-right:6px;vertical-align:middle;position:relative;top:-1px}
+#attract-bar{position:absolute;bottom:0;left:0;height:2px;background:var(--rh-red);width:0%;opacity:0.6;border-radius:1px}
+#dots{display:flex;align-items:center;gap:5px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--border2);cursor:pointer;transition:background 0.25s,transform 0.25s}
+.dot.active{background:var(--text);transform:scale(1.4)}
+#main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 36px 14px;gap:24px}
+#hero{text-align:center;max-width:760px}
+#story-line{font-family:'Syne',sans-serif;font-size:clamp(20px,2.4vw,30px);font-weight:600;line-height:1.25;letter-spacing:-0.3px;color:var(--text);min-height:2.4em;display:flex;align-items:center;justify-content:center;transition:opacity 0.25s}
+#story-sub{margin-top:8px;font-size:clamp(12px,1.1vw,14px);font-weight:300;color:var(--muted);line-height:1.7;min-height:3.4em;display:flex;align-items:center;justify-content:center;transition:opacity 0.25s}
+#pipeline-wrap{width:100%;max-width:960px}
+#stages{display:flex;align-items:center;justify-content:space-between}
+.conn{flex:1;height:1.5px;background:var(--border);position:relative;overflow:hidden;min-width:6px}
+.conn-fill{position:absolute;top:0;left:0;height:100%;width:0%;transition:width 0.7s ease;border-radius:1px}
+.stage{display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;position:relative;transition:transform 0.2s;flex-shrink:0}
+.stage:hover{transform:translateY(-3px)}.stage:active{transform:translateY(0)}
+.stage-ring{width:62px;height:62px;border-radius:50%;border:1.5px solid var(--border2);background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;position:relative;transition:border-color 0.35s,background 0.35s}
+.stage-num{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;line-height:1;transition:color 0.35s;color:var(--muted)}
+.stage-verb{font-size:7.5px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.35s}
+.stage-tool{font-size:10px;font-weight:500;color:var(--muted);transition:color 0.35s;text-align:center;white-space:nowrap;letter-spacing:0.02em}
+@keyframes ring-pulse{0%{transform:scale(1);opacity:0.5}100%{transform:scale(1.8);opacity:0}}
+.stage.active .stage-ring::after{content:'';position:absolute;inset:-1px;border-radius:50%;border:1.5px solid var(--sc);animation:ring-pulse 2s ease-out infinite}
+.stage.active .stage-ring{border-color:var(--sc);background:var(--sg)}
+.stage.active .stage-num,.stage.active .stage-verb,.stage.active .stage-tool{color:var(--sc)}
+#detail{width:100%;max-width:960px;background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:18px 24px;display:flex;align-items:flex-start;gap:18px;opacity:0;transform:translateY(10px);transition:opacity 0.3s,transform 0.3s;pointer-events:none}
+#detail.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+#detail-stripe{width:3px;align-self:stretch;border-radius:2px;flex-shrink:0;transition:background 0.35s}
+#detail-body{flex:1;min-width:0}
+#detail-badge{display:inline-block;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:5px;margin-bottom:6px;transition:background 0.3s,color 0.3s}
+#detail-headline{font-family:'Syne',sans-serif;font-size:16px;font-weight:600;line-height:1.3;margin-bottom:6px;color:var(--text)}
+#detail-text{font-size:12.5px;color:var(--muted);line-height:1.75;font-weight:300}
+#detail-stats{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.stat-chip{font-size:10.5px;padding:2px 8px;border-radius:4px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);font-weight:400;letter-spacing:0.02em}
+#footer{padding:12px 44px;border-top:1px solid var(--border);display:flex;align-items:center;gap:14px;flex-shrink:0;flex-wrap:wrap}
+.credit-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);font-weight:400;flex-shrink:0}
+.credit-chips{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.credit-chip{font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid var(--border);color:var(--dim);font-weight:400;letter-spacing:0.04em}
+.credit-chip.highlight{border-color:rgba(238,0,0,0.3);color:rgba(238,0,0,0.6)}
+</style>
+</head>
+<body>
+<div id="app">
+  <header id="header">
+    <div class="brand">
+      <div class="fed-logo"><span class="fed">Fed</span><span class="aura">Aura</span></div>
+      <div class="rh-pill"><span class="rh-dot"></span>Red Hat OpenShift AI</div>
+    </div>
+    <div id="dots"></div>
+    <div id="attract-bar"></div>
+  </header>
+  <main id="main">
+    <div id="hero">
+      <div id="story-line"></div>
+      <div id="story-sub"></div>
+    </div>
+    <div id="pipeline-wrap"><div id="stages"></div></div>
+    <div id="detail">
+      <div id="detail-stripe"></div>
+      <div id="detail-body">
+        <div id="detail-badge"></div>
+        <div id="detail-headline"></div>
+        <div id="detail-text"></div>
+        <div id="detail-stats"></div>
+      </div>
+    </div>
+  </main>
+  <footer id="footer">
+    <span class="credit-label">Built with</span>
+    <div class="credit-chips">
+      <span class="credit-chip highlight">Red Hat OpenShift AI</span>
+      <span class="credit-chip">Docling</span>
+      <span class="credit-chip">OpenShift AI Training</span>
+      <span class="credit-chip">AutoML</span>
+      <span class="credit-chip">Auto RAG</span>
+      <span class="credit-chip">SDG Hub</span>
+      <span class="credit-chip">Eval Hub</span>
+      <span class="credit-chip">ITS</span>
+    </div>
+  </footer>
+</div>
+<script>
+const STAGES=[
+  {verb:'Ingest',tool:'Docling',color:'#4A9EE0',
+   storyline:'Start with the data.',
+   substory:'Docling ingests Fed Aura\'s policy documents, loan records, and compliance guidelines — PDFs, tables, structured and unstructured — and turns raw documents into clean, chunked, model-ready data.',
+   headline:'Every document. Any format. Model-ready.',
+   detail:'Docling processes PDFs, spreadsheets, and scanned documents into structured chunks with metadata preserved. Bank policy manuals, loan underwriting guidelines, historical approval data — all ingested, indexed, and ready to power every downstream model and retrieval system.',
+   stats:['PDFs, tables, scans','Structured + unstructured','Metadata preserved','Feeds RAG + Training']},
+  {verb:'Train',tool:'OpenShift AI',color:'#C44E9A',
+   storyline:'Teach the models Fed Aura\'s world.',
+   substory:'Training pipelines run on OpenShift AI — fine-tuning foundation models on Fed Aura\'s own loan data, decision history, and regulatory language so they understand the business, not just the internet.',
+   headline:'Models trained on your data. Not generic ones.',
+   detail:'OpenShift AI orchestrates distributed training jobs across GPU nodes — fine-tuning foundation models on domain-specific financial data. The result: models that understand DTI ratios, FICO bands, and Regulation B before they see a single customer query.',
+   stats:['Distributed GPU training','Domain fine-tuning','Repeatable pipelines','BYOM or foundation models']},
+  {verb:'Decide',tool:'AutoML',color:'#5B8FD4',
+   storyline:'A $340,000 mortgage application arrives.',
+   substory:'AutoML analyzes 47 financial signals — debt-to-income ratio, payment history, employment tenure — and renders a decision in under 200ms with a ranked list of contributing risk factors.',
+   headline:'Instant, explainable credit decisions',
+   detail:'Red Hat OpenShift AI hosts the AutoML model as a scalable inference endpoint. The model returns an approval probability and surfaces the top contributing risk factors — so every downstream system knows exactly what to explain and every decision is auditable.',
+   stats:['< 200ms inference','94.3% accuracy','12 risk tiers','Auditable decisions']},
+  {verb:'Explain',tool:'Auto RAG',color:'#2EA898',
+   storyline:'"Why was my application rejected?"',
+   substory:'Auto RAG retrieves the relevant bank policy sections from Docling-indexed documents, combines them with the AutoML risk factors, and generates a precise, policy-grounded answer.',
+   headline:'Grounded answers — every claim is traceable',
+   detail:'Auto RAG connects to the Docling-indexed document store to retrieve exact policy sections at query time. When a customer asks "Why was my DTI ratio flagged?", the system returns the specific policy clause — no hallucinations, fully auditable, ready for compliance review.',
+   stats:['Docling-backed retrieval','Traceable citations','Multi-turn support','Compliance-ready']},
+  {verb:'Test',tool:'SDG Hub',color:'#D4921E',
+   storyline:'But does the system actually work under pressure?',
+   substory:'SDG Hub generates 10,000+ synthetic evaluation scenarios — edge cases, ambiguous policies, adversarial questions — to stress-test the RAG system before a single customer sees it.',
+   headline:'Synthetic data. Real rigor.',
+   detail:'Inputs: bank policy documents + AutoML decision examples. Output: fully-labeled evaluation datasets covering rejection explanations, approval conditions, next-step guidance, and policy clarifications — complete with ground-truth answers and retrieved context.',
+   stats:['10,000+ scenarios','4 scenario categories','Ground truth Q&A pairs','Plugs into any eval framework']},
+  {verb:'Secure',tool:'Eval Hub',color:'#CC4444',
+   storyline:'Is it safe to put in front of real customers?',
+   substory:'Eval Hub runs the full risk analysis: accuracy benchmarks, adversarial probes, groundedness scoring. Can the system be manipulated? Does it leak sensitive data? Green light or red — no gray areas.',
+   headline:'Risk quantified before production',
+   detail:'Eval Hub ingests the SDG Hub-generated test scenarios and runs accuracy, groundedness, and safety benchmarks. It also executes adversarial probes — what happens if someone tries to manipulate the loan explanation system? Every risk vector is quantified before a line of code ships to production.',
+   stats:['Accuracy benchmarking','Adversarial probing','Groundedness scoring','Risk report before launch']},
+  {verb:'Scale',tool:'ITS',color:'#8860C8',
+   storyline:'10,000 loan officers. Simultaneously.',
+   substory:'ITS handles the surge — mortgage season, quarter-end volume, rate-change spikes. More concurrent users. Higher accuracy from fine-tuned smaller models. Lower infrastructure cost as demand grows.',
+   headline:'Better accuracy. Smaller models. Lower cost.',
+   detail:'Inference Training System fine-tunes compact, efficient models using the evaluation data generated across the pipeline. Fed Aura handles 10× the query volume at a fraction of the GPU cost — without sacrificing the accuracy that compliance demands.',
+   stats:['10,000+ concurrent users','Increased accuracy','Reduced model footprint','Lower infrastructure cost']}
+];
+
+const ATTRACT_MS=5000;
+let activeIdx=-1,attractStart=null,attractPaused=false,rafId=null,attractTimer=null;
+
+const dotsEl=document.getElementById('dots');
+STAGES.forEach((_,i)=>{const d=document.createElement('div');d.className='dot';d.addEventListener('click',()=>userSelect(i));dotsEl.appendChild(d);});
+
+function updateDots(idx){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));}
+
+const stagesEl=document.getElementById('stages');
+STAGES.forEach((s,i)=>{
+  if(i>0){const conn=document.createElement('div');conn.className='conn';conn.id=`conn-${i}`;const fill=document.createElement('div');fill.className='conn-fill';fill.id=`conn-fill-${i}`;conn.appendChild(fill);stagesEl.appendChild(conn);}
+  const el=document.createElement('div');el.className='stage';el.id=`stage-${i}`;
+  el.style.setProperty('--sc',s.color);el.style.setProperty('--sg',s.color+'18');
+  el.innerHTML=`<div class="stage-ring"><div class="stage-num" style="color:${s.color}99">0${i+1}</div><div class="stage-verb">${s.verb}</div></div><div class="stage-tool">${s.tool}</div>`;
+  el.addEventListener('click',()=>userSelect(i));stagesEl.appendChild(el);
+});
+
+function setStage(idx){
+  if(idx===activeIdx)return;
+  activeIdx=idx;const s=STAGES[idx];
+  STAGES.forEach((_,i)=>document.getElementById(`stage-${i}`).classList.toggle('active',i===idx));
+  STAGES.forEach((st,i)=>{
+    if(i===0)return;
+    const fill=document.getElementById(`conn-fill-${i}`);if(!fill)return;
+    fill.style.background=`linear-gradient(90deg,${STAGES[i-1].color}55,${st.color}55)`;
+    fill.style.transition=`width 0.65s ${(i-1)*0.06}s ease`;
+    fill.style.width=i<=idx?'100%':'0%';
+  });
+  updateDots(idx);
+  const sl=document.getElementById('story-line'),ss=document.getElementById('story-sub');
+  sl.style.opacity='0';ss.style.opacity='0';
+  clearTimeout(sl._t);sl._t=setTimeout(()=>{sl.textContent=s.storyline;ss.textContent=s.substory;sl.style.opacity='1';ss.style.opacity='1';},220);
+  const detail=document.getElementById('detail');
+  detail.classList.remove('visible');clearTimeout(detail._t);
+  detail._t=setTimeout(()=>{
+    document.getElementById('detail-stripe').style.background=s.color;
+    const badge=document.getElementById('detail-badge');
+    badge.textContent=s.tool;badge.style.background=s.color+'22';badge.style.color=s.color;badge.style.border=`1px solid ${s.color}44`;
+    document.getElementById('detail-headline').textContent=s.headline;
+    document.getElementById('detail-text').textContent=s.detail;
+    document.getElementById('detail-stats').innerHTML=s.stats.map(st=>`<span class="stat-chip">${st}</span>`).join('');
+    detail.classList.add('visible');
+  },120);
+}
+
+const bar=document.getElementById('attract-bar');
+function tickAttract(now){
+  if(attractPaused||attractStart===null){bar.style.width='0%';return;}
+  const elapsed=now-attractStart,pct=Math.min((elapsed/ATTRACT_MS)*100,100);
+  bar.style.transition='none';bar.style.width=pct+'%';
+  if(elapsed>=ATTRACT_MS){setStage((activeIdx+1)%STAGES.length);attractStart=performance.now();}
+  rafId=requestAnimationFrame(tickAttract);
+}
+function startAttract(){if(rafId)cancelAnimationFrame(rafId);attractStart=performance.now();attractPaused=false;rafId=requestAnimationFrame(tickAttract);}
+function pauseAttract(r=18000){attractPaused=true;attractStart=null;bar.style.transition='width 0.3s';bar.style.width='0%';clearTimeout(attractTimer);attractTimer=setTimeout(startAttract,r);}
+function userSelect(idx){setStage(idx);pauseAttract();}
+
+setStage(0);setTimeout(startAttract,1200);
+</script>
+</body>
+</html>
