@@ -71,6 +71,9 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
 #panel-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--text);letter-spacing:-0.3px}
 #panel-subtitle{font-size:13px;color:var(--muted);font-weight:300;margin-top:2px}
 #panel-context{font-size:13.5px;color:var(--text);line-height:1.7;font-weight:400;padding:12px 16px;border-radius:8px;border-left:3px solid var(--border2);background:var(--surface2)}
+#panel-video-wrap{border-radius:10px;overflow:hidden;background:#000}
+#panel-video-wrap.hidden{display:none}
+#panel-video{width:100%;display:block;aspect-ratio:16/9}
 #panel-desc{font-size:13px;color:var(--muted);line-height:1.8;font-weight:300}
 #panel-bullets{list-style:none;display:flex;flex-direction:column;gap:8px}
 #panel-bullets li{font-size:12.5px;color:var(--muted);line-height:1.6;padding-left:16px;position:relative;font-weight:300}
@@ -137,6 +140,9 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
         </div>
       </div>
       <div id="panel-context"></div>
+      <div id="panel-video-wrap">
+        <video id="panel-video" controls preload="metadata"></video>
+      </div>
       <div id="panel-desc"></div>
       <ul id="panel-bullets"></ul>
       <div id="panel-relations">
@@ -236,6 +242,7 @@ const COMPONENTS=[
       'UI and notebooks for end-to-end AutoML pipelines',
       'Roadmap: expose trained models as MCP tools for agentic workflows'
     ],
+    videoSrc:'videos/automl.mp4',
     demoUrl:'https://drive.google.com/file/d/1AkdAIqSo-zVDOStVRNbaHpvObrVLgGiA/view',
     demoLabel:'Watch AutoML Demo', demoStatus:'video',
     relationships:['Predictive models complement AutoRAG explanations','Trained models can be evaluated with Eval Hub','Roadmap: expose models as MCP tools for agents']
@@ -253,6 +260,7 @@ const COMPONENTS=[
       'UI and notebooks for end-to-end AutoRAG pipelines',
       'Roadmap: Agentic RAG and Graph RAG'
     ],
+    videoSrc:'videos/autorag.mp4',
     demoUrl:'https://drive.google.com/file/d/13HLxQeLyNGv8DnvuojprUEU-XXpRrkHQ/view',
     demoLabel:'Watch AutoRAG Demo', demoStatus:'video',
     relationships:['Consumes structured data from Data Processing','RAG pipelines are scored with Eval Hub metrics','SDG Hub generates synthetic datasets for RAG testing']
@@ -270,6 +278,7 @@ const COMPONENTS=[
       'First-class multilingual support',
       'Scalable generation via Kubeflow Pipelines'
     ],
+    videoSrc:'videos/sdg.mp4',
     demoUrl:'https://drive.google.com/file/d/1LBvT1VFJg9VNzBGG-Cw_A5Eg5glotJBd/view',
     demoLabel:'Watch SDG Hub Demo', demoStatus:'video',
     relationships:['Generates evaluation datasets consumed by Eval Hub','Produces fine-tuning data for Training Hub','Creates adversarial test sets for safety validation']
@@ -287,6 +296,7 @@ const COMPONENTS=[
       'Industry-specific test suites tailored to your domain',
       'REST API, client SDK, and integrated UI'
     ],
+    videoSrc:'videos/evalhub.mp4',
     demoUrl:'https://drive.google.com/file/d/1DxdwPRyGDUqHy5_VeFjt95pb038wTtE_/view',
     demoLabel:'Watch Eval Hub Demo', demoStatus:'video',
     relationships:['Scores and benchmarks AutoRAG pipeline configurations','Validates models produced by Training Hub and AutoML','Consumes synthetic datasets from SDG Hub']
@@ -303,6 +313,7 @@ const COMPONENTS=[
       'Multiple scaling algorithms: Best-of-N, MCTS, beam search',
       'Agentic patterns for tool-calling and multi-step reasoning'
     ],
+    videoSrc:'videos/its.mp4',
     demoUrl:'https://red.ht/its-hub-demo',
     demoLabel:'Launch ITS Hub Demo', demoStatus:'live',
     relationships:['Enhances output quality of models from Training Hub','Improves RAG response quality with AutoRAG pipelines','Integrates with Eval Hub for evaluating scaled inference']
@@ -391,12 +402,23 @@ function openPanel(stageIdx){
   document.getElementById('panel-context').textContent=comp.fedauraContext;
   document.getElementById('panel-context').style.borderLeftColor=accent;
   document.getElementById('panel-desc').textContent=comp.description;
+  const videoWrap=document.getElementById('panel-video-wrap');
+  const videoEl=document.getElementById('panel-video');
+  if(comp.videoSrc){
+    videoEl.src=comp.videoSrc;
+    videoEl.title=comp.title+' demo';
+    videoWrap.classList.remove('hidden');
+  }else{
+    videoEl.removeAttribute('src');
+    videoEl.load();
+    videoWrap.classList.add('hidden');
+  }
   const bulletsEl=document.getElementById('panel-bullets');
   bulletsEl.innerHTML=comp.bullets.map(b=>`<li style="--bc:${accent}">${b}</li>`).join('');
   const relList=document.getElementById('panel-rel-list');
   relList.innerHTML=comp.relationships.map(r=>`<li>${r}</li>`).join('');
   const demoBtn=document.getElementById('panel-demo-btn');
-  if(comp.demoUrl&&comp.demoStatus!=='coming-soon'){
+  if(comp.demoUrl&&comp.demoStatus==='live'){
     demoBtn.href=comp.demoUrl;
     demoBtn.textContent=comp.demoLabel;
     demoBtn.style.background=accent;
@@ -414,6 +436,8 @@ function openPanel(stageIdx){
 
 function closePanel(){
   if(!panelOpen)return;
+  const v=document.getElementById('panel-video');
+  if(v){v.pause();}
   document.getElementById('backdrop').classList.remove('open');
   document.getElementById('anchor-panel').classList.remove('open');
   panelOpen=false;
