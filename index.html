@@ -36,10 +36,10 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
 .stage-tool{font-size:10px;font-weight:500;color:var(--muted);transition:color 0.35s;text-align:center;white-space:nowrap;letter-spacing:0.02em}
 @keyframes ring-pulse{0%{transform:scale(1);opacity:0.5}100%{transform:scale(1.8);opacity:0}}
 @keyframes ring-pulse-anchor{0%{transform:scale(1);opacity:0.7}100%{transform:scale(2.2);opacity:0}}
+.stage.active .stage-ring::after{content:'';position:absolute;inset:-1px;border-radius:50%;border:1.5px solid var(--sc);animation:ring-pulse 2s ease-out infinite}
 .stage[data-anchor].active .stage-ring::after{animation:ring-pulse-anchor 2s ease-out infinite}
 .stage[data-anchor] .stage-ring{border-width:2px}
 .stage[data-anchor] .stage-tool{font-weight:600}
-.stage.active .stage-ring::after{content:'';position:absolute;inset:-1px;border-radius:50%;border:1.5px solid var(--sc);animation:ring-pulse 2s ease-out infinite}
 .stage.active .stage-ring{border-color:var(--sc);background:var(--sg)}
 .stage.active .stage-num,.stage.active .stage-verb,.stage.active .stage-tool{color:var(--sc)}
 #detail{width:100%;max-width:960px;background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:18px 24px;display:flex;align-items:flex-start;gap:18px;opacity:0;transform:translateY(10px);transition:opacity 0.3s,transform 0.3s;pointer-events:none}
@@ -209,6 +209,21 @@ const COMPONENTS=[
     relationships:['Feeds structured data into AutoRAG','Produces training-ready datasets for SDG Hub and Training Hub','Prepares evaluation corpora for Eval Hub']
   },
   {
+    id:6, slug:'training', title:'Training Hub', subtitle:'Post-Training Domain Customization',
+    tagline:'Fine-tune and customize models for your domain',
+    color:'#f97316', icon:'\u{1F3AF}', isAnchor:false,
+    fedauraContext:'Training Hub fine-tunes foundation models on Fed Aura\'s own loan data and regulatory language so they understand the business, not just the internet.',
+    description:'Customize foundation models for your domain with enterprise-grade post-training workflows. Training Hub supports LoRA/QLoRA fine-tuning, continued pre-training, and distributed training at scale.',
+    bullets:[
+      'LoRA/QLoRA fine-tuning with Unsloth backend',
+      'Continued Pre-Training for deep domain knowledge',
+      'MLflow experiment tracking and model lifecycle management',
+      'Distributed training via Kubeflow Trainer v2'
+    ],
+    demoUrl:null, demoLabel:null, demoStatus:'coming-soon',
+    relationships:['Consumes synthetic training data from SDG Hub','Trained models are validated by Eval Hub','Fine-tuned models can leverage ITS Hub for inference']
+  },
+  {
     id:2, slug:'automl', title:'AutoML', subtitle:'Automate Predictive Model Development',
     tagline:'From historical data to production-ready ML models',
     color:'#a78bfa', icon:'\u{1F916}', isAnchor:true,
@@ -243,23 +258,6 @@ const COMPONENTS=[
     relationships:['Consumes structured data from Data Processing','RAG pipelines are scored with Eval Hub metrics','SDG Hub generates synthetic datasets for RAG testing']
   },
   {
-    id:4, slug:'eval', title:'Eval Hub', subtitle:'Evaluate Accuracy, Performance, and Risk',
-    tagline:'Comprehensive evaluation for models, RAG, and agents',
-    color:'#34d399', icon:'\u{1F4CA}', isAnchor:true,
-    fedauraContext:'Before Fed Aura goes live, Eval Hub runs the full risk analysis — accuracy benchmarks, adversarial probes, groundedness scoring. Green light or red, no gray areas.',
-    description:'Evaluate any AI system — models, RAG pipelines, agents, and applications. Benchmark performance and safety against criteria that matter to your domain. Industry-specific evaluation collections validate AI against real-world scenarios.',
-    bullets:[
-      'Evaluate models, RAG systems, agents, and full applications',
-      'Benchmark against performance, safety, and risk criteria',
-      'Measure agent capabilities: autonomy, tool use, reasoning quality',
-      'Industry-specific test suites tailored to your domain',
-      'REST API, client SDK, and integrated UI'
-    ],
-    demoUrl:'https://drive.google.com/file/d/1DxdwPRyGDUqHy5_VeFjt95pb038wTtE_/view',
-    demoLabel:'Watch Eval Hub Demo', demoStatus:'video',
-    relationships:['Scores and benchmarks AutoRAG pipeline configurations','Validates models produced by Training Hub and AutoML','Consumes synthetic datasets from SDG Hub']
-  },
-  {
     id:5, slug:'sdg', title:'SDG Hub', subtitle:'Synthetic Data for AI Evaluation and Training',
     tagline:'Generate the data your AI systems need to improve',
     color:'#fb7185', icon:'\u{1F9EA}', isAnchor:false,
@@ -277,19 +275,21 @@ const COMPONENTS=[
     relationships:['Generates evaluation datasets consumed by Eval Hub','Produces fine-tuning data for Training Hub','Creates adversarial test sets for safety validation']
   },
   {
-    id:6, slug:'training', title:'Training Hub', subtitle:'Post-Training Domain Customization',
-    tagline:'Fine-tune and customize models for your domain',
-    color:'#f97316', icon:'\u{1F3AF}', isAnchor:false,
-    fedauraContext:'Training Hub fine-tunes foundation models on Fed Aura\'s own loan data and regulatory language so they understand the business, not just the internet.',
-    description:'Customize foundation models for your domain with enterprise-grade post-training workflows. Training Hub supports LoRA/QLoRA fine-tuning, continued pre-training, and distributed training at scale.',
+    id:4, slug:'eval', title:'Eval Hub', subtitle:'Evaluate Accuracy, Performance, and Risk',
+    tagline:'Comprehensive evaluation for models, RAG, and agents',
+    color:'#34d399', icon:'\u{1F4CA}', isAnchor:true,
+    fedauraContext:'Before Fed Aura goes live, Eval Hub runs the full risk analysis — accuracy benchmarks, adversarial probes, groundedness scoring. Green light or red, no gray areas.',
+    description:'Evaluate any AI system — models, RAG pipelines, agents, and applications. Benchmark performance and safety against criteria that matter to your domain. Industry-specific evaluation collections validate AI against real-world scenarios.',
     bullets:[
-      'LoRA/QLoRA fine-tuning with Unsloth backend',
-      'Continued Pre-Training for deep domain knowledge',
-      'MLflow experiment tracking and model lifecycle management',
-      'Distributed training via Kubeflow Trainer v2'
+      'Evaluate models, RAG systems, agents, and full applications',
+      'Benchmark against performance, safety, and risk criteria',
+      'Measure agent capabilities: autonomy, tool use, reasoning quality',
+      'Industry-specific test suites tailored to your domain',
+      'REST API, client SDK, and integrated UI'
     ],
-    demoUrl:null, demoLabel:null, demoStatus:'coming-soon',
-    relationships:['Consumes synthetic training data from SDG Hub','Trained models are validated by Eval Hub','Fine-tuned models can leverage ITS Hub for inference']
+    demoUrl:'https://drive.google.com/file/d/1DxdwPRyGDUqHy5_VeFjt95pb038wTtE_/view',
+    demoLabel:'Watch Eval Hub Demo', demoStatus:'video',
+    relationships:['Scores and benchmarks AutoRAG pipeline configurations','Validates models produced by Training Hub and AutoML','Consumes synthetic datasets from SDG Hub']
   },
   {
     id:7, slug:'its', title:'ITS Hub', subtitle:'Inference-Time Scaling',
