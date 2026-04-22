@@ -1,10 +1,10 @@
-# Connecting Models to Data — Booth Demo
+# Connecting Models to Data: Booth Demo
 
 Interactive HTML experience for Red Hat Summit showcasing the **Connecting Models to Data** pillar of Red Hat AI.
 
 ## What It Does
 
-A pipeline animation walks through the FedAura loan-processing story — seven stages from data ingestion to production scaling. Three **anchor stages** (AutoML, AutoRAG, Eval Hub) open a detail panel with component info and inline video demos. The remaining stages show lighter inline descriptions with optional demo links.
+A pipeline animation walks through the FedAura loan-processing story across seven stages, from data ingestion to production scaling. Three **anchor stages** (AutoML, AutoRAG, Eval Hub) open a detail panel with component info and inline video demos. The remaining stages show lighter inline descriptions with optional demo links.
 
 ### The Pipeline
 
@@ -20,13 +20,13 @@ A pipeline animation walks through the FedAura loan-processing story — seven s
 
 ## How to Use
 
-Open `index.html` in a browser. That's it — no build step, no server required.
+Open `index.html` in a browser. That's it: no build step, no server required.
 
 ### Three Modes
 
-- **Attractor** — Auto-cycles through stages every 7 seconds. Leave it running at the booth.
-- **Guided** — Click anchor stages to open the detail panel. Narrate while the video plays.
-- **Self-service** — Share the link. Visitors explore at their own pace.
+- **Attractor:** Auto-cycles through stages every 7 seconds. Leave it running at the booth.
+- **Guided:** Click anchor stages to open the detail panel. Narrate while the video plays.
+- **Self-service:** Share the link. Visitors explore at their own pace.
 
 ### Controls
 
@@ -42,7 +42,7 @@ Open `index.html` in a browser. That's it — no build step, no server required.
 ## File Structure
 
 ```
-index.html          # The entire experience — HTML, CSS, JS in one file
+index.html          # The entire experience: HTML, CSS, JS in one file
 videos/
   automl.mp4        # AutoML demo video
   autorag.mp4       # AutoRAG demo video
@@ -58,5 +58,5 @@ videos/
 
 ## Tech Stack
 
-- Vanilla HTML, CSS, JavaScript — no framework, no build step
+- Vanilla HTML, CSS, JavaScript: no framework, no build step
 - Google Fonts (Syne + DM Sans)

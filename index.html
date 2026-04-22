@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fed Aura — Powered by Red Hat OpenShift AI</title>
+<title>Fed Aura: Powered by Red Hat OpenShift AI</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<script>(function(){try{var s=localStorage.getItem('theme');if(!s){s=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',s);var fs=parseFloat(localStorage.getItem('textScale'));if(Number.isFinite(fs)&&fs>=0.85&&fs<=1.4)document.documentElement.style.setProperty('--text-scale',fs);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<script>(function(){try{var s=localStorage.getItem('theme');if(!s){s=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',s);var fs=parseFloat(localStorage.getItem('textScale'));if(Number.isFinite(fs)&&fs>=0.85&&fs<=2)document.documentElement.style.setProperty('--text-scale',fs);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--text-scale:1}
@@ -218,8 +218,8 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
           <span>Text size</span>
           <span class="settings-value"><span id="text-scale-value">100</span>%</span>
         </label>
-        <input id="text-scale-range" type="range" min="0.85" max="1.4" step="0.05" value="1">
-        <div class="settings-tickmarks"><span>85%</span><span>100%</span><span>140%</span></div>
+        <input id="text-scale-range" type="range" min="0.85" max="2" step="0.05" value="1">
+        <div class="settings-tickmarks"><span>85%</span><span>140%</span><span>200%</span></div>
         <div class="settings-hint">Scales the storyline, detail card, and side panel text. UI chrome stays at its designed size.</div>
       </div>
       <div class="settings-actions">
@@ -233,45 +233,45 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
 const STAGES=[
   {verb:'Ingest',tool:'Docling',color:'#4A9EE0',
    storyline:'Start with the data.',
-   substory:'Docling ingests Fed Aura\'s policy documents, loan records, and compliance guidelines — PDFs, tables, structured and unstructured — and turns raw documents into clean, model-ready data.',
+substory:'Docling ingests Fed Aura\'s policy documents, loan records, and compliance guidelines (PDFs, tables, structured and unstructured), and turns raw documents into clean, model-ready data.',
    headline:'Every document. Any format. Model-ready.',
-   detail:'Docling processes PDFs, spreadsheets, and scanned documents into structured, searchable data. Bank policy manuals, loan guidelines, historical approval records — all ingested, organized, and ready to power every downstream model and retrieval system.',
+   detail:'Docling processes PDFs, spreadsheets, and scanned documents into structured, searchable data. Bank policy manuals, loan guidelines, and historical approval records are all ingested, organized, and ready to power every downstream model and retrieval system.',
    stats:['PDFs, tables, scans','Structured + unstructured','Metadata preserved','Feeds RAG + Training']},
   {verb:'Train',tool:'OpenShift AI',color:'#C44E9A',
    storyline:'Teach the models Fed Aura\'s world.',
-   substory:'Training pipelines run on OpenShift AI — fine-tuning foundation models on Fed Aura\'s own loan data, decision history, and regulatory language so they understand the business, not just the internet.',
+   substory:'Training pipelines run on OpenShift AI, fine-tuning foundation models on Fed Aura\'s own loan data, decision history, and regulatory language so they understand the business, not just the internet.',
    headline:'Models trained on your data. Not generic ones.',
    detail:'OpenShift AI runs training jobs across GPU clusters, fine-tuning foundation models on your financial data. The result: models that understand debt-to-income ratios, credit score bands, and lending regulations before they see a single customer query.',
    stats:['Distributed GPU training','Domain fine-tuning','Repeatable pipelines','Bring your own model']},
   {verb:'Decide',tool:'AutoML',color:'#5B8FD4',
    storyline:'A $340,000 mortgage application arrives.',
-   substory:'AutoML analyzes 47 financial signals — debt-to-income ratio, payment history, employment tenure — and renders a decision in under 200ms with a ranked list of contributing risk factors.',
+   substory:'AutoML analyzes 47 financial signals (debt-to-income ratio, payment history, employment tenure) and renders a decision in under 200ms with a ranked list of contributing risk factors.',
    headline:'Instant, explainable credit decisions',
-   detail:'AutoML hosts the credit risk model as a scalable endpoint. It returns an approval probability and surfaces the top contributing risk factors — so every downstream system knows what to explain and every decision is auditable.',
+   detail:'AutoML hosts the credit risk model as a scalable endpoint. It returns an approval probability and surfaces the top contributing risk factors, so every downstream system knows what to explain and every decision is auditable.',
    stats:['< 200ms inference','94.3% accuracy','12 risk tiers','Auditable decisions']},
   {verb:'Explain',tool:'Auto RAG',color:'#2EA898',
    storyline:'"Why was my application rejected?"',
    substory:'Auto RAG retrieves the relevant bank policy sections from Docling-indexed documents, combines them with the AutoML risk factors, and generates a precise, policy-grounded answer.',
-   headline:'Grounded answers — every claim is traceable',
-   detail:'Auto RAG connects to the document store to retrieve exact policy sections on demand. When a customer asks "Why was my debt-to-income ratio flagged?", the system returns the specific policy clause — no hallucinations, fully traceable, ready for compliance review.',
+   headline:'Grounded answers: every claim is traceable',
+   detail:'Auto RAG connects to the document store to retrieve exact policy sections on demand. When a customer asks "Why was my debt-to-income ratio flagged?", the system returns the specific policy clause: no hallucinations, fully traceable, and ready for compliance review.',
    stats:['Policy-backed retrieval','Traceable citations','Multi-turn support','Compliance-ready']},
   {verb:'Test',tool:'SDG Hub',color:'#D4921E',
    storyline:'But does the system actually work under pressure?',
-   substory:'SDG Hub generates 10,000+ synthetic evaluation scenarios — edge cases, ambiguous policies, adversarial questions — to stress-test the RAG system before a single customer sees it.',
+   substory:'SDG Hub generates 10,000+ synthetic evaluation scenarios (edge cases, ambiguous policies, adversarial questions) to stress-test the RAG system before a single customer sees it.',
    headline:'Synthetic data. Real rigor.',
-   detail:'SDG Hub takes your policy documents and decision examples, then generates thousands of test scenarios: rejection explanations, approval conditions, guidance requests, and policy edge cases — complete with expected answers for automated scoring.',
+   detail:'SDG Hub takes your policy documents and decision examples, then generates thousands of test scenarios (rejection explanations, approval conditions, guidance requests, and policy edge cases), complete with expected answers for automated scoring.',
    stats:['10,000+ scenarios','4 scenario categories','Ground truth Q&A pairs','Plugs into any eval tool']},
   {verb:'Validate',tool:'Eval Hub',color:'#34d399',
    storyline:'Does it hold up under scrutiny?',
    substory:'Eval Hub runs comprehensive validation: accuracy benchmarks, adversarial probes, groundedness scoring. Does the system hallucinate? Can it be manipulated? Every claim is measured before a single customer sees it.',
-   headline:'Every claim measured before production',
-   detail:'Eval Hub takes the test scenarios from SDG Hub and runs accuracy, groundedness, and adversarial evaluations. It measures whether the system hallucinates, whether outputs are grounded in source documents, and how it handles edge cases — all quantified before anything goes to production.',
+   headline:'Evaluate any AI system. Benchmark what matters. Prove it in production.',
+   detail:'EvalHub is Red Hat’s unified, framework-agnostic AI evaluation platform for models, RAG pipelines, agents, and full AI applications. It replaces fragmented tooling with a single control plane that orchestrates any evaluation framework so teams benchmark performance, safety, and risk against criteria that actually matter to their domain.',
    stats:['Accuracy benchmarking','Adversarial probing','Groundedness scoring','Validation report before launch']},
   {verb:'Scale',tool:'ITS',color:'#8860C8',
    storyline:'10,000 loan officers. Simultaneously.',
-   substory:'ITS handles the surge — mortgage season, quarter-end volume, rate-change spikes. More concurrent users. Higher accuracy from fine-tuned smaller models. Lower infrastructure cost as demand grows.',
+   substory:'ITS handles the surge: mortgage season, quarter-end volume, rate-change spikes. More concurrent users. Higher accuracy from fine-tuned smaller models. Lower infrastructure cost as demand grows.',
    headline:'Better accuracy. Smaller models. Lower cost.',
-   detail:'Inference-Time Scaling fine-tunes compact, efficient models using your evaluation data. Fed Aura handles 10x the query volume at a fraction of the GPU cost — without sacrificing the accuracy that compliance demands.',
+   detail:'Inference-Time Scaling fine-tunes compact, efficient models using your evaluation data. Fed Aura handles 10x the query volume at a fraction of the GPU cost, without sacrificing the accuracy that compliance demands.',
    stats:['10,000+ concurrent users','Increased accuracy','Reduced model footprint','Lower infrastructure cost']}
 ];
 const COMPONENTS=[
@@ -280,7 +280,7 @@ const COMPONENTS=[
     tagline:'From raw documents to structured, AI-ready datasets',
     color:'#fbbf24', icon:'\u{1F4C4}', isAnchor:false,
     fedauraContext:'Docling ingests Fed Aura\'s policy documents, loan records, and compliance guidelines, turning raw documents into clean, model-ready data.',
-    description:'Transform raw, unstructured data into clean, AI-ready formats at enterprise scale. Docling parses complex documents — PDFs, slides, filings — into structured output, all running on Red Hat OpenShift AI.',
+    description:'Transform raw, unstructured data into clean, AI-ready formats at enterprise scale. Docling parses complex documents (PDFs, slides, filings) into structured output, all running on Red Hat OpenShift AI.',
     bullets:[
       'Converts PDFs, presentations, and filings into structured data',
       'Distributed data processing at scale with Kubeflow Spark',
@@ -309,7 +309,7 @@ const COMPONENTS=[
     id:2, slug:'automl', title:'AutoML', subtitle:'Automate Predictive Model Development',
     tagline:'From historical data to production-ready ML models',
     color:'#a78bfa', icon:'\u{1F916}', isAnchor:true,
-    fedauraContext:'AutoML automatically builds and optimizes the credit risk model that powers Fed Aura\'s mortgage lending decisions — analyzing 47 financial signals in under 200ms.',
+    fedauraContext:'AutoML automatically builds and optimizes the credit risk model that powers Fed Aura\'s mortgage lending decisions, analyzing 47 financial signals in under 200ms.',
     description:'Provide your historical data and AutoML handles feature engineering, model selection, and validation. A process that took months becomes a streamlined, automated workflow anyone can initiate.',
     bullets:[
       'Automated feature engineering from raw tabular data',
@@ -327,8 +327,8 @@ const COMPONENTS=[
     id:3, slug:'autorag', title:'AutoRAG', subtitle:'Optimize RAG Pipelines in Minutes, Not Days',
     tagline:'Automated retrieval-augmented generation pipeline optimization',
     color:'#60a5fa', icon:'\u{1F50D}', isAnchor:true,
-    fedauraContext:'When a customer asks "Why was my application rejected?", AutoRAG retrieves the exact policy clause and generates a precise, traceable answer — no hallucinations.',
-    description:'AutoRAG eliminates the guesswork in building production-grade RAG pipelines. It automatically evaluates thousands of configurations to find the optimal setup for your data — chunk sizes, embedding models, vector stores, retrieval settings.',
+    fedauraContext:'When a customer asks "Why was my application rejected?", AutoRAG retrieves the exact policy clause and generates a precise, traceable answer: no hallucinations.',
+    description:'AutoRAG eliminates the guesswork in building production-grade RAG pipelines. It automatically evaluates thousands of configurations to find the optimal setup for your data: chunk sizes, embedding models, vector stores, and retrieval settings.',
     bullets:[
       'Automated pipeline testing across multiple RAG techniques',
       'Hyperparameter optimization for chunk size, embeddings, and retrieval',
@@ -345,7 +345,7 @@ const COMPONENTS=[
     id:5, slug:'sdg', title:'SDG Hub', subtitle:'Synthetic Data for AI Evaluation and Training',
     tagline:'Generate the data your AI systems need to improve',
     color:'#fb7185', icon:'\u{1F9EA}', isAnchor:false,
-    fedauraContext:'SDG Hub generates 10,000+ synthetic evaluation scenarios — edge cases, ambiguous policies, adversarial questions — to stress-test the system before customers see it.',
+    fedauraContext:'SDG Hub generates 10,000+ synthetic evaluation scenarios (edge cases, ambiguous policies, adversarial questions) to stress-test the system before customers see it.',
     description:'SDG Hub is the control plane for AI evaluation and training data. Generate domain-specific datasets for RAG evaluation, tool-calling fine-tuning, and adversarial safety testing at scale.',
     bullets:[
       'Generate evaluation datasets for RAG systems',
@@ -363,16 +363,16 @@ const COMPONENTS=[
     id:4, slug:'eval', title:'Eval Hub', subtitle:'Evaluate any AI system. Benchmark what matters. Prove it in production.',
     tagline:'Comprehensive evaluation for models, RAG, and agents',
     color:'#34d399', icon:'\u{1F4CA}', isAnchor:true,
-    fedauraContext:'Before Fed Aura goes live, Eval Hub runs the full risk analysis — accuracy benchmarks, adversarial probes, groundedness scoring. Green light or red, no gray areas.',
+    fedauraContext:'Before Fed Aura goes live, Eval Hub runs the full risk analysis: accuracy benchmarks, adversarial probes, groundedness scoring. Green light or red, no gray areas.',
     description:'EvalHub is Red Hat’s unified, framework-agnostic AI evaluation platform for models, RAG pipelines, agents, and full AI applications. It replaces fragmented tooling with a single control plane that orchestrates any evaluation framework so teams benchmark performance, safety, and risk against criteria that actually matter to their domain.',
     bullets:[
-      '<strong>Evaluate everything</strong> — Models, RAG systems, autonomous agents, and end-to-end AI applications through one platform',
-      '<strong>Framework-agnostic by design</strong> — Orchestrate and compare results across evaluation frameworks without lock-in; add new ones through a pluggable adapter architecture',
-      '<strong>Benchmark what matters</strong> — Measure performance, safety, risk, agent autonomy, tool use, and reasoning quality against your criteria, not generic leaderboards',
-      '<strong>Domain-specific evaluation collections</strong> — Expert-curated, framework-agnostic test suites that validate AI against real-world scenarios for your industry',
-      '<strong>Immutable evaluation artifacts</strong> — Every evaluation produces a tamper-proof, versioned record tied to exact configurations, data, and infrastructure — so results are reproducible, auditable, and defensible',
-      '<strong>Prove compliance</strong> — Standardized reports that satisfy EU AI Act, FedRAMP, and internal governance out of the box, backed by the immutable artifacts that auditors demand',
-      '<strong>Use it your way</strong> — REST API, client SDK, CLI, and integrated UI — from a developer’s laptop to Kubernetes-orchestrated production evaluations'
+      '<strong>Evaluate everything:</strong> Models, RAG systems, autonomous agents, and end-to-end AI applications through one platform',
+      '<strong>Framework-agnostic by design:</strong> Orchestrate and compare results across evaluation frameworks without lock-in; add new ones through a pluggable adapter architecture',
+      '<strong>Benchmark what matters:</strong> Measure performance, safety, risk, agent autonomy, tool use, and reasoning quality against your criteria, not generic leaderboards',
+      '<strong>Domain-specific evaluation collections:</strong> Expert-curated, framework-agnostic test suites that validate AI against real-world scenarios for your industry',
+      '<strong>Immutable evaluation artifacts:</strong> Every evaluation produces a tamper-proof, versioned record tied to exact configurations, data, and infrastructure, so results are reproducible, auditable, and defensible',
+      '<strong>Prove compliance:</strong> Standardized reports that satisfy EU AI Act, FedRAMP, and internal governance out of the box, backed by the immutable artifacts that auditors demand',
+      '<strong>Use it your way:</strong> REST API, client SDK, CLI, and integrated UI, from a developer’s laptop to Kubernetes-orchestrated production evaluations'
     ],
     videoSrc:'videos/evalhub.mp4',
     demoUrl:'https://drive.google.com/file/d/1DxdwPRyGDUqHy5_VeFjt95pb038wTtE_/view',
@@ -383,7 +383,7 @@ const COMPONENTS=[
     id:7, slug:'its', title:'ITS Hub', subtitle:'Inference-Time Scaling',
     tagline:'Scale model reasoning at inference time',
     color:'#22d3ee', icon:'\u26A1', isAnchor:false,
-    fedauraContext:'ITS handles the surge — mortgage season, quarter-end volume, rate-change spikes. 10,000 concurrent loan officers with better accuracy at lower cost.',
+    fedauraContext:'ITS handles the surge: mortgage season, quarter-end volume, rate-change spikes. 10,000 concurrent loan officers with better accuracy at lower cost.',
     description:'Enhance model output quality by applying additional compute at inference time. Instead of training larger models, ITS uses scaling algorithms to improve reasoning, accuracy, and reliability from existing models.',
     bullets:[
       'SDK for direct integration into applications',
