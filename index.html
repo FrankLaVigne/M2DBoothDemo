@@ -437,7 +437,7 @@ function openSettings(){
   val.textContent=(ATTRACT_MS/1000).toFixed(1);
   const tsRange=document.getElementById('text-scale-range');
   const tsVal=document.getElementById('text-scale-value');
-  const currentScale=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--text-scale'))||1;
+  const currentScale=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--text-scale'))||1.6;
   tsRange.value=currentScale.toFixed(2);
   tsVal.textContent=Math.round(currentScale*100);
   modal.classList.add('open');
