@@ -15,8 +15,8 @@ A pipeline animation walks through the FedAura loan-processing story across seve
 | Decide | **AutoML** | Anchor |
 | Explain | **AutoRAG** | Anchor |
 | Test | SDG Hub | Non-anchor |
-| Secure | **Eval Hub** | Anchor |
-| Scale | ITS Hub | Non-anchor |
+| Validate | **Eval Hub** | Anchor |
+| Refine | ITS Hub | Non-anchor |
 
 ## How to Use
 
@@ -24,20 +24,23 @@ Open `index.html` in a browser. That's it: no build step, no server required.
 
 ### Three Modes
 
-- **Attractor:** Auto-cycles through stages every 7 seconds. Leave it running at the booth.
-- **Guided:** Click anchor stages to open the detail panel. Narrate while the video plays.
+- **Attractor:** Auto-cycles through stages (interval configurable in Settings, default 7 seconds). Leave it running at the booth.
+- **Guided:** Click anchor stages to read the summary, then use the **See it in action →** CTA to open the detail panel. Narrate while the video plays.
 - **Self-service:** Share the link. Visitors explore at their own pace.
 
 ### Controls
 
 | Input | Action |
 |-------|--------|
-| Click stage | Select stage (opens panel if anchor) |
+| Click stage | Select stage (pauses auto-cycle) |
+| Click "See it in action →" | Open detail panel (anchor stages only) |
 | Click outside panel | Close panel |
 | Arrow keys | Navigate stages |
 | Enter | Open panel for current anchor |
-| Escape | Close panel |
+| Escape | Close panel or settings |
 | Spacebar | Pause/resume auto-cycling |
+| Header gear icon | Open Settings (stage time, text size) |
+| Header theme icon | Cycle dark / light / high contrast |
 
 ## File Structure
 
