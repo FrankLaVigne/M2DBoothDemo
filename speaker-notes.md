@@ -130,6 +130,7 @@ Use these talking points when walking someone through the demo. You don't need t
 **Story beat:** "10,000 loan officers. Simultaneously."
 
 **Talking points:**
+- Think of it as an army of second opinions on every important decision, generated simultaneously. ITS picks the best one.
 - Inference-Time Scaling samples multiple responses at inference and selects the best one.
 - Instead of training bigger models, ITS gets larger-model accuracy from smaller ones at runtime.
 - Algorithms: Best-of-N, Monte Carlo Tree Search, beam search.
@@ -161,4 +162,4 @@ Use these talking points when walking someone through the demo. You don't need t
 | **Explain** | **AutoRAG** | **Optimized RAG pipelines in minutes** |
 | Test | SDG Hub | Synthetic data for evaluation and training |
 | **Validate** | **Eval Hub** | **Comprehensive AI validation before production** |
-| Refine | ITS Hub | Better accuracy from existing models at runtime |
+| Refine | ITS Hub | Sample many answers, pick the best, at runtime |
