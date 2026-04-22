@@ -65,9 +65,10 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
 .credit-chip{font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid var(--border);color:var(--dim);font-weight:400;letter-spacing:0.04em}
 .credit-chip.highlight{border-color:rgba(238,0,0,0.3);color:rgba(238,0,0,0.6)}
 #backdrop{position:fixed;inset:0;background:var(--backdrop);opacity:0;pointer-events:none;transition:opacity 0.3s;z-index:100}
-#theme-toggle{background:none;border:1px solid var(--border2);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;margin-left:14px;transition:color 0.2s,border-color 0.2s,background 0.2s}
-#theme-toggle:hover{color:var(--text);border-color:var(--text);background:var(--surface2)}
-#theme-toggle svg{width:16px;height:16px;display:block}
+#theme-toggle,#settings-toggle{background:none;border:1px solid var(--border2);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;margin-left:10px;transition:color 0.2s,border-color 0.2s,background 0.2s}
+#theme-toggle{margin-left:14px}
+#theme-toggle:hover,#settings-toggle:hover{color:var(--text);border-color:var(--text);background:var(--surface2)}
+#theme-toggle svg,#settings-toggle svg{width:16px;height:16px;display:block}
 :root[data-theme="dark"] #theme-toggle .sun-icon{display:block}
 :root[data-theme="dark"] #theme-toggle .moon-icon{display:none}
 :root[data-theme="light"] #theme-toggle .sun-icon{display:none}
@@ -100,6 +101,27 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
 #panel-demo-btn{display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:12px 24px;border-radius:8px;font-family:'Syne',sans-serif;font-size:14px;font-weight:600;text-decoration:none;color:#fff;cursor:pointer;transition:filter 0.2s,transform 0.15s;align-self:flex-start}
 #panel-demo-btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
 #panel-demo-btn.hidden{display:none}
+#settings-modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:102;opacity:0;pointer-events:none;transition:opacity 0.25s}
+#settings-modal.open{opacity:1;pointer-events:auto}
+#settings-modal-backdrop{position:absolute;inset:0;background:var(--backdrop)}
+#settings-card{position:relative;background:var(--surface);border:1px solid var(--border2);border-radius:14px;width:90%;max-width:440px;padding:28px 28px 24px;box-shadow:0 20px 60px rgba(0,0,0,0.4);transform:translateY(10px);transition:transform 0.25s}
+#settings-modal.open #settings-card{transform:translateY(0)}
+#settings-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--text);letter-spacing:-0.3px;margin-bottom:4px}
+#settings-subtitle{font-size:12.5px;color:var(--muted);font-weight:300;margin-bottom:22px;line-height:1.5}
+#settings-close{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--muted);font-size:26px;cursor:pointer;line-height:1;padding:4px 8px;border-radius:6px;transition:color 0.2s,background 0.2s}
+#settings-close:hover{color:var(--text);background:var(--surface2)}
+.settings-row{margin-bottom:18px}
+.settings-label{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;font-weight:500;color:var(--text);margin-bottom:10px;letter-spacing:0.02em}
+.settings-label .settings-value{font-family:'Syne',sans-serif;font-size:16px;font-weight:600;color:var(--rh-red)}
+.settings-hint{font-size:11px;color:var(--muted);font-weight:300;margin-top:8px;line-height:1.5}
+#attract-range{-webkit-appearance:none;appearance:none;width:100%;height:4px;background:var(--border2);border-radius:2px;outline:none;cursor:pointer;padding:0;margin:0}
+#attract-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:var(--rh-red);cursor:pointer;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--rh-red)}
+#attract-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--rh-red);cursor:pointer;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--rh-red)}
+.settings-tickmarks{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--dim);letter-spacing:0.05em}
+.settings-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;padding-top:16px;border-top:1px solid var(--border)}
+.settings-btn{font-family:inherit;font-size:12px;font-weight:500;padding:8px 16px;border-radius:6px;cursor:pointer;letter-spacing:0.03em;transition:background 0.2s,border-color 0.2s,color 0.2s}
+.settings-btn.secondary{background:none;border:1px solid var(--border2);color:var(--muted)}
+.settings-btn.secondary:hover{color:var(--text);border-color:var(--text)}
 </style>
 </head>
 <body>
@@ -114,6 +136,9 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
       <button id="theme-toggle" type="button" aria-label="Toggle light/dark mode" onclick="toggleTheme()">
         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
         <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+      <button id="settings-toggle" type="button" aria-label="Open settings" onclick="openSettings()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
       </button>
     </div>
     <div id="attract-bar"></div>
@@ -170,6 +195,27 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
         <ul id="panel-rel-list"></ul>
       </div>
       <a id="panel-demo-btn" href="#" target="_blank" rel="noopener"></a>
+    </div>
+  </div>
+  <div id="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div id="settings-modal-backdrop" onclick="closeSettings()"></div>
+    <div id="settings-card">
+      <button id="settings-close" type="button" onclick="closeSettings()" aria-label="Close settings">&times;</button>
+      <div id="settings-title">Settings</div>
+      <div id="settings-subtitle">Adjust how the demo plays on screen.</div>
+      <div class="settings-row">
+        <label class="settings-label" for="attract-range">
+          <span>Time per stage</span>
+          <span class="settings-value"><span id="attract-value">7.0</span>s</span>
+        </label>
+        <input id="attract-range" type="range" min="2" max="20" step="0.5" value="7">
+        <div class="settings-tickmarks"><span>2s</span><span>11s</span><span>20s</span></div>
+        <div class="settings-hint">How long each pipeline stage stays active before the demo auto-advances to the next one.</div>
+      </div>
+      <div class="settings-actions">
+        <button type="button" class="settings-btn secondary" onclick="resetSettings()">Reset to default</button>
+        <button type="button" class="settings-btn secondary" onclick="closeSettings()">Done</button>
+      </div>
     </div>
   </div>
 </div>
@@ -304,17 +350,19 @@ const COMPONENTS=[
     relationships:['Generates evaluation datasets consumed by Eval Hub','Produces fine-tuning data for Training Hub','Creates adversarial test sets for safety validation']
   },
   {
-    id:4, slug:'eval', title:'Eval Hub', subtitle:'Evaluate Accuracy, Performance, and Risk',
+    id:4, slug:'eval', title:'Eval Hub', subtitle:'Framework-agnostic AI evaluation',
     tagline:'Comprehensive evaluation for models, RAG, and agents',
     color:'#34d399', icon:'\u{1F4CA}', isAnchor:true,
     fedauraContext:'Before Fed Aura goes live, Eval Hub runs the full risk analysis — accuracy benchmarks, adversarial probes, groundedness scoring. Green light or red, no gray areas.',
-    description:'Evaluate any AI system — models, RAG pipelines, agents, and applications. Benchmark performance and safety against criteria that matter to your domain. Industry-specific evaluation collections validate AI against real-world scenarios.',
+    description:'EvalHub is Red Hat AI’s unified, framework-agnostic AI evaluation platform so teams benchmark performance, safety, and risk against criteria that actually matter to their domain.',
     bullets:[
-      'Evaluate models, RAG systems, agents, and full applications',
-      'Benchmark against performance, safety, and risk criteria',
-      'Measure agent capabilities: autonomy, tool use, reasoning quality',
-      'Industry-specific test suites tailored to your domain',
-      'REST API, client SDK, and integrated UI'
+      '<strong>Evaluate everything</strong> — Models, RAG systems, autonomous agents, and end-to-end AI applications through one platform',
+      '<strong>Framework-agnostic by design</strong> — Orchestrate and compare results across evaluation frameworks without lock-in; add new ones through a pluggable adapter architecture',
+      '<strong>Benchmark what matters</strong> — Measure performance, safety, risk, agent autonomy, tool use, and reasoning quality against your criteria, not generic leaderboards',
+      '<strong>Domain-specific evaluation collections</strong> — Expert-curated, framework-agnostic test suites that validate AI against real-world scenarios for your industry',
+      '<strong>Immutable evaluation artifacts</strong> — Every evaluation produces a tamper-proof, versioned record tied to exact configurations, data, and infrastructure — so results are reproducible, auditable, and defensible',
+      '<strong>Prove compliance</strong> — Standardized reports that satisfy EU AI Act, FedRAMP, and internal governance out of the box, backed by the immutable artifacts that auditors demand',
+      '<strong>Use it your way</strong> — REST API, client SDK, CLI, and integrated UI — from a developer’s laptop to Kubernetes-orchestrated production evaluations'
     ],
     videoSrc:'videos/evalhub.mp4',
     demoUrl:'https://drive.google.com/file/d/1DxdwPRyGDUqHy5_VeFjt95pb038wTtE_/view',
@@ -347,7 +395,42 @@ function toggleTheme(){
   try{localStorage.setItem('theme',next);}catch(e){}
 }
 
-const ATTRACT_MS=7000;
+function openSettings(){
+  const modal=document.getElementById('settings-modal');
+  const range=document.getElementById('attract-range');
+  const val=document.getElementById('attract-value');
+  range.value=(ATTRACT_MS/1000).toFixed(1);
+  val.textContent=(ATTRACT_MS/1000).toFixed(1);
+  modal.classList.add('open');
+  attractPaused=true;attractStart=null;
+  const bar=document.getElementById('attract-bar');
+  if(bar){bar.style.transition='width 0.3s';bar.style.width='0%';}
+  clearTimeout(attractTimer);
+}
+
+function closeSettings(){
+  document.getElementById('settings-modal').classList.remove('open');
+  pauseAttract();
+}
+
+function resetSettings(){
+  const range=document.getElementById('attract-range');
+  range.value=(DEFAULT_ATTRACT_MS/1000).toFixed(1);
+  range.dispatchEvent(new Event('input',{bubbles:true}));
+}
+
+document.getElementById('attract-range').addEventListener('input',function(){
+  const seconds=parseFloat(this.value);
+  const ms=Math.round(seconds*1000);
+  ATTRACT_MS=ms;
+  document.getElementById('attract-value').textContent=seconds.toFixed(1);
+  try{localStorage.setItem('attractMs',String(ms));}catch(e){}
+  if(attractStart!==null)attractStart=performance.now();
+});
+
+const DEFAULT_ATTRACT_MS=7000,MIN_ATTRACT_MS=2000,MAX_ATTRACT_MS=20000;
+let ATTRACT_MS=DEFAULT_ATTRACT_MS;
+try{const saved=parseInt(localStorage.getItem('attractMs'),10);if(Number.isFinite(saved)&&saved>=MIN_ATTRACT_MS&&saved<=MAX_ATTRACT_MS)ATTRACT_MS=saved;}catch(e){}
 let activeIdx=-1,attractStart=null,attractPaused=false,rafId=null,attractTimer=null;
 
 const dotsEl=document.getElementById('dots');
@@ -472,12 +555,13 @@ function closePanel(){
 }
 
 document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&document.getElementById('settings-modal').classList.contains('open')){closeSettings();return;}
   if(e.key==='Escape'&&panelOpen){closePanel();return;}
   if(e.key==='Enter'&&!panelOpen&&activeIdx>=0){
     if(COMPONENTS[activeIdx]&&COMPONENTS[activeIdx].isAnchor){openPanel(activeIdx);}
     return;
   }
-  if(panelOpen)return;
+  if(panelOpen||document.getElementById('settings-modal').classList.contains('open'))return;
   if(e.key==='ArrowRight'){userSelect((activeIdx+1)%STAGES.length);return;}
   if(e.key==='ArrowLeft'){userSelect((activeIdx-1+STAGES.length)%STAGES.length);return;}
   if(e.key===' '){e.preventDefault();if(attractPaused){startAttract();}else{pauseAttract();}return;}
