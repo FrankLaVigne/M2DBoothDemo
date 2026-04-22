@@ -123,7 +123,7 @@ Use these talking points when walking someone through the demo. You don't need t
 
 ---
 
-## Stage 7: Scale (ITS Hub)
+## Stage 7: Refine (ITS Hub)
 
 **Story beat:** "10,000 loan officers. Simultaneously."
 
@@ -159,4 +159,4 @@ Use these talking points when walking someone through the demo. You don't need t
 | **Explain** | **AutoRAG** | **Optimized RAG pipelines in minutes** |
 | Test | SDG Hub | Synthetic data for evaluation and training |
 | **Validate** | **Eval Hub** | **Comprehensive AI validation before production** |
-| Scale | ITS Hub | Better accuracy from existing models at runtime |
+| Refine | ITS Hub | Better accuracy from existing models at runtime |
