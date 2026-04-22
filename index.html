@@ -5,12 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fed Aura: Powered by Red Hat OpenShift AI</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<script>(function(){try{var s=localStorage.getItem('theme');if(!s){s=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',s);var fs=parseFloat(localStorage.getItem('textScale'));if(Number.isFinite(fs)&&fs>=0.85&&fs<=2)document.documentElement.style.setProperty('--text-scale',fs);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<script>(function(){try{var s=localStorage.getItem('theme');if(s!=='dark'&&s!=='light'&&s!=='high-contrast'){s=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',s);var fs=parseFloat(localStorage.getItem('textScale'));if(Number.isFinite(fs)&&fs>=0.85&&fs<=2)document.documentElement.style.setProperty('--text-scale',fs);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--text-scale:1}
 :root,:root[data-theme="dark"]{--bg:#0A0A0C;--surface:#111113;--surface2:#18181B;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--rh-red:#EE0000;--text:#EEEEE8;--muted:#7A7A74;--dim:#3A3A36;--backdrop:rgba(0,0,0,0.55);--video-bg:#000}
 :root[data-theme="light"]{--bg:#FAFAF7;--surface:#FFFFFF;--surface2:#F1F1EC;--border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.16);--rh-red:#EE0000;--text:#1A1A1A;--muted:#6B6B66;--dim:#B5B5B0;--backdrop:rgba(0,0,0,0.35);--video-bg:#000}
+:root[data-theme="high-contrast"]{--bg:#000000;--surface:#000000;--surface2:#141414;--border:#FFFFFF;--border2:#FFFFFF;--rh-red:#FF5252;--text:#FFFFFF;--muted:#FFFFFF;--dim:#FFFFFF;--backdrop:rgba(0,0,0,0.85);--video-bg:#000}
+:root[data-theme="high-contrast"] #story-sub,:root[data-theme="high-contrast"] #detail-text,:root[data-theme="high-contrast"] #panel-desc,:root[data-theme="high-contrast"] #panel-subtitle,:root[data-theme="high-contrast"] #panel-bullets li,:root[data-theme="high-contrast"] #panel-rel-list li{font-weight:500}
+:root[data-theme="high-contrast"] .stage-num,:root[data-theme="high-contrast"] .stage-verb,:root[data-theme="high-contrast"] .stage-tool{color:var(--text)}
+:root[data-theme="high-contrast"] .stage.active .stage-ring{border-color:var(--text);background:#FFFFFF1F}
+:root[data-theme="high-contrast"] .stage.active .stage-num,:root[data-theme="high-contrast"] .stage.active .stage-verb,:root[data-theme="high-contrast"] .stage.active .stage-tool{color:var(--text)}
+:root[data-theme="high-contrast"] .stage.active .stage-ring::after{border-color:var(--text)}
+:root[data-theme="high-contrast"] .stage[data-anchor] .stage-ring{box-shadow:0 0 18px rgba(255,255,255,0.25)}
+:root[data-theme="high-contrast"] #panel-bullets li::before{color:var(--text)}
+:root[data-theme="high-contrast"] .conn-fill{background:var(--text) !important}
+:root[data-theme="high-contrast"] #detail-stripe{background:var(--text) !important}
+:root[data-theme="high-contrast"] #detail-badge{background:#FFFFFF1F !important;color:var(--text) !important;border:1px solid var(--text) !important}
+:root[data-theme="high-contrast"] #panel-accent{background:var(--text) !important}
+:root[data-theme="high-contrast"] #panel-context{border-left-color:var(--text) !important}
+:root[data-theme="high-contrast"] #panel-demo-btn{background:var(--text) !important;color:#000 !important}
 html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;overflow:hidden;user-select:none;transition:background 0.3s,color 0.3s}
 #app{display:flex;flex-direction:column;height:100vh}
 #header{display:flex;align-items:center;justify-content:space-between;padding:16px 44px;border-bottom:1px solid var(--border);flex-shrink:0;position:relative}
@@ -70,10 +84,10 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
 #theme-toggle{margin-left:14px}
 #theme-toggle:hover,#settings-toggle:hover{color:var(--text);border-color:var(--text);background:var(--surface2)}
 #theme-toggle svg,#settings-toggle svg{width:16px;height:16px;display:block}
+#theme-toggle .sun-icon,#theme-toggle .moon-icon,#theme-toggle .contrast-icon{display:none}
 :root[data-theme="dark"] #theme-toggle .sun-icon{display:block}
-:root[data-theme="dark"] #theme-toggle .moon-icon{display:none}
-:root[data-theme="light"] #theme-toggle .sun-icon{display:none}
 :root[data-theme="light"] #theme-toggle .moon-icon{display:block}
+:root[data-theme="high-contrast"] #theme-toggle .contrast-icon{display:block}
 #header-right{display:flex;align-items:center}
 #backdrop.open{opacity:1;pointer-events:auto}
 #anchor-panel{position:fixed;top:0;right:0;width:45%;max-width:560px;height:100vh;background:var(--surface);border-left:1px solid var(--border2);transform:translateX(100%);transition:transform 0.3s ease;z-index:101;display:flex;flex-direction:column;overflow-y:auto}
@@ -134,9 +148,10 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
     </div>
     <div id="header-right">
       <div id="dots"></div>
-      <button id="theme-toggle" type="button" aria-label="Toggle light/dark mode" onclick="toggleTheme()">
+      <button id="theme-toggle" type="button" aria-label="Cycle theme (dark, light, high contrast)" onclick="toggleTheme()">
         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
         <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <svg class="contrast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3v18" fill="currentColor" stroke="none"></path><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"></path></svg>
       </button>
       <button id="settings-toggle" type="button" aria-label="Open settings" onclick="openSettings()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
@@ -399,8 +414,10 @@ const COMPONENTS=[
 ];
 
 function toggleTheme(){
-  const current=document.documentElement.getAttribute('data-theme')==='light'?'light':'dark';
-  const next=current==='light'?'dark':'light';
+  const order=['dark','light','high-contrast'];
+  const current=document.documentElement.getAttribute('data-theme');
+  const idx=order.indexOf(current);
+  const next=order[(idx+1)%order.length];
   document.documentElement.setAttribute('data-theme',next);
   try{localStorage.setItem('theme',next);}catch(e){}
 }
