@@ -80,11 +80,6 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
 .detail-action .arrow{transition:transform 0.15s}
 .detail-action:hover .arrow{transform:translateX(3px)}
 :root[data-theme="high-contrast"] .detail-action{background:#FFFFFF1F !important;color:var(--text) !important;border-color:var(--text) !important}
-#footer{padding:12px 44px;border-top:1px solid var(--border);display:flex;align-items:center;gap:14px;flex-shrink:0;flex-wrap:wrap}
-.credit-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);font-weight:400;flex-shrink:0}
-.credit-chips{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
-.credit-chip{font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid var(--border);color:var(--dim);font-weight:400;letter-spacing:0.04em}
-.credit-chip.highlight{border-color:rgba(238,0,0,0.3);color:rgba(238,0,0,0.6)}
 #backdrop{position:fixed;inset:0;background:var(--backdrop);opacity:0;pointer-events:none;transition:opacity 0.3s;z-index:100}
 body.panel-open #hero,body.panel-open #detail{opacity:0;pointer-events:none;transition:opacity 0.25s ease}
 #theme-toggle,#settings-toggle{background:none;border:1px solid var(--border2);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;margin-left:10px;transition:color 0.2s,border-color 0.2s,background 0.2s}
@@ -182,19 +177,6 @@ body.panel-open #hero,body.panel-open #detail{opacity:0;pointer-events:none;tran
       </div>
     </div>
   </main>
-  <footer id="footer">
-    <span class="credit-label">Built with</span>
-    <div class="credit-chips">
-      <span class="credit-chip highlight">Red Hat OpenShift AI</span>
-      <span class="credit-chip">Docling</span>
-      <span class="credit-chip">OpenShift AI Training</span>
-      <span class="credit-chip highlight">AutoML</span>
-      <span class="credit-chip highlight">Auto RAG</span>
-      <span class="credit-chip">SDG Hub</span>
-      <span class="credit-chip highlight">Eval Hub</span>
-      <span class="credit-chip">ITS</span>
-    </div>
-  </footer>
   <div id="backdrop" onclick="closePanel()"></div>
   <div id="anchor-panel">
     <button id="panel-close" onclick="closePanel()" aria-label="Close">&times;</button>
