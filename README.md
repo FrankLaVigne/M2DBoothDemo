@@ -41,6 +41,7 @@ Open `index.html` in a browser. That's it: no build step, no server required.
 | Spacebar | Pause/resume auto-cycling |
 | Header gear icon | Open Settings (stage time, text size) |
 | Header theme icon | Cycle dark / light / high contrast |
+| Drag / double-click text | Select text on the storyline, detail card, or side panel (other chrome is unselectable so click-through stays clean) |
 
 ## File Structure
 

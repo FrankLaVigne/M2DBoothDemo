@@ -2,6 +2,8 @@
 
 Use these talking points when walking someone through the demo. You don't need to hit every stage; find out what the visitor cares about and focus there. The three big rocks (AutoML, AutoRAG, Eval Hub) are the priority.
 
+**Handy to know:** the storyline, detail card, and side-panel text are selectable, so if a visitor wants a quote you can highlight and copy. The pipeline chrome (stages, buttons, chips) stays unselectable so you don't accidentally highlight it while clicking around.
+
 ---
 
 ## Opening
