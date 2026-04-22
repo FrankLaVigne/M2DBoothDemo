@@ -8,7 +8,7 @@
 <script>(function(){try{var s=localStorage.getItem('theme');if(s!=='dark'&&s!=='light'&&s!=='high-contrast'){s=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',s);var fs=parseFloat(localStorage.getItem('textScale'));if(Number.isFinite(fs)&&fs>=0.85&&fs<=2)document.documentElement.style.setProperty('--text-scale',fs);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--text-scale:1}
+:root{--text-scale:1.6}
 :root,:root[data-theme="dark"]{--bg:#0A0A0C;--surface:#111113;--surface2:#18181B;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--rh-red:#EE0000;--text:#EEEEE8;--muted:#7A7A74;--dim:#3A3A36;--backdrop:rgba(0,0,0,0.55);--video-bg:#000}
 :root[data-theme="light"]{--bg:#FAFAF7;--surface:#FFFFFF;--surface2:#F1F1EC;--border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.16);--rh-red:#EE0000;--text:#1A1A1A;--muted:#6B6B66;--dim:#B5B5B0;--backdrop:rgba(0,0,0,0.35);--video-bg:#000}
 :root[data-theme="high-contrast"]{--bg:#000000;--surface:#000000;--surface2:#141414;--border:#FFFFFF;--border2:#FFFFFF;--rh-red:#FF5252;--text:#FFFFFF;--muted:#FFFFFF;--dim:#FFFFFF;--backdrop:rgba(0,0,0,0.85);--video-bg:#000}
@@ -238,9 +238,9 @@ body.panel-open #hero,body.panel-open #detail{opacity:0;pointer-events:none;tran
       <div class="settings-row">
         <label class="settings-label" for="text-scale-range">
           <span>Text size</span>
-          <span class="settings-value"><span id="text-scale-value">100</span>%</span>
+          <span class="settings-value"><span id="text-scale-value">160</span>%</span>
         </label>
-        <input id="text-scale-range" type="range" min="0.85" max="2" step="0.05" value="1">
+        <input id="text-scale-range" type="range" min="0.85" max="2" step="0.05" value="1.6">
         <div class="settings-tickmarks"><span>85%</span><span>140%</span><span>200%</span></div>
         <div class="settings-hint">Scales the storyline, detail card, and side panel text. UI chrome stays at its designed size.</div>
       </div>
@@ -457,7 +457,7 @@ function resetSettings(){
   range.value=(DEFAULT_ATTRACT_MS/1000).toFixed(1);
   range.dispatchEvent(new Event('input',{bubbles:true}));
   const tsRange=document.getElementById('text-scale-range');
-  tsRange.value='1';
+  tsRange.value='1.6';
   tsRange.dispatchEvent(new Event('input',{bubbles:true}));
 }
 
