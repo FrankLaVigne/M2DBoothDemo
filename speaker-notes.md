@@ -128,11 +128,11 @@ Use these talking points when walking someone through the demo. You don't need t
 **Story beat:** "10,000 loan officers. Simultaneously."
 
 **Talking points:**
-- Inference-Time Scaling applies extra compute at inference time to improve output quality.
-- Instead of training bigger models, ITS makes existing models smarter at runtime.
+- Inference-Time Scaling samples multiple responses at inference and selects the best one.
+- Instead of training bigger models, ITS gets larger-model accuracy from smaller ones at runtime.
 - Algorithms: Best-of-N, Monte Carlo Tree Search, beam search.
 - Available as an SDK and a gateway (zero code changes).
-- In the FedAura story: 10x query volume at a fraction of the GPU cost.
+- In the FedAura story: larger-model accuracy from smaller models at a fraction of the GPU cost, without sacrificing the accuracy that compliance demands.
 
 **If they ask:** "How does it improve quality without retraining?"
 > It generates multiple candidate responses and selects the best one (Best-of-N), or it uses tree search to explore different reasoning paths. You're trading inference compute for output quality, which is often cheaper than training a larger model.

@@ -80,6 +80,7 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
 .credit-chip{font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid var(--border);color:var(--dim);font-weight:400;letter-spacing:0.04em}
 .credit-chip.highlight{border-color:rgba(238,0,0,0.3);color:rgba(238,0,0,0.6)}
 #backdrop{position:fixed;inset:0;background:var(--backdrop);opacity:0;pointer-events:none;transition:opacity 0.3s;z-index:100}
+body.panel-open #hero,body.panel-open #detail{opacity:0;pointer-events:none;transition:opacity 0.25s ease}
 #theme-toggle,#settings-toggle{background:none;border:1px solid var(--border2);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;margin-left:10px;transition:color 0.2s,border-color 0.2s,background 0.2s}
 #theme-toggle{margin-left:14px}
 #theme-toggle:hover,#settings-toggle:hover{color:var(--text);border-color:var(--text);background:var(--surface2)}
@@ -580,6 +581,7 @@ function openPanel(stageIdx){
   }
   document.getElementById('backdrop').classList.add('open');
   document.getElementById('anchor-panel').classList.add('open');
+  document.body.classList.add('panel-open');
   panelOpen=true;
   attractPaused=true;attractStart=null;
   bar.style.transition='width 0.3s';bar.style.width='0%';
@@ -592,6 +594,7 @@ function closePanel(){
   if(v){v.pause();}
   document.getElementById('backdrop').classList.remove('open');
   document.getElementById('anchor-panel').classList.remove('open');
+  document.body.classList.remove('panel-open');
   panelOpen=false;
   pauseAttract();
 }
