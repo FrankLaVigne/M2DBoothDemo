@@ -545,9 +545,6 @@ function pauseAttract(r=18000){attractPaused=true;attractStart=null;bar.style.tr
 function userSelect(idx){
   setStage(idx);
   pauseAttract();
-  if(COMPONENTS[idx]&&COMPONENTS[idx].isAnchor){
-    openPanel(idx);
-  }
 }
 
 let panelOpen=false;
