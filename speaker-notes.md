@@ -74,7 +74,7 @@ Use these talking points when walking someone through the demo. You don't need t
 **Talking points:**
 - Building a good RAG pipeline is hard. Chunk sizes, embedding models, retrieval strategies, rerankers: hundreds of decisions.
 - AutoRAG automates the search. It tests thousands of configurations and finds the optimal setup for your data.
-- In the FedAura story, a customer asks why they were rejected. AutoRAG retrieves the exact policy clause: no hallucination, fully traceable.
+- In the FedAura story, a customer asks why they were rejected. AutoRAG builds an optimized RAG pipeline that pulls from the bank's lending policies, the applicant's recent financial filings, and current market news (all Docling-indexed), combines them with the AutoML risk factors, and returns the exact policy clause: no hallucination, fully traceable.
 - Evaluation metrics built in: answer correctness, faithfulness, groundedness.
 - Available as Tech Preview in Red Hat AI 3.4.
 
