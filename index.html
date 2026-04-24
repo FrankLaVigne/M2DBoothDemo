@@ -38,7 +38,9 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
 #dots{display:flex;align-items:center;gap:5px}
 .dot{width:5px;height:5px;border-radius:50%;background:var(--border2);cursor:pointer;transition:background 0.25s,transform 0.25s}
 .dot.active{background:var(--text);transform:scale(1.4)}
-#main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 36px 14px;gap:24px}
+#main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 36px 14px;gap:24px;min-height:0}
+#legal-footer{flex-shrink:0;padding:10px 44px 12px;border-top:1px solid var(--border);text-align:center}
+#legal-footer p{font-size:10.5px;line-height:1.45;font-weight:300;color:var(--muted);letter-spacing:0.01em;max-width:960px;margin:0 auto}
 #hero{text-align:center;max-width:760px}
 #story-line{font-family:'Syne',sans-serif;font-size:calc(clamp(20px,2.4vw,30px) * var(--text-scale));font-weight:600;line-height:1.25;letter-spacing:-0.3px;color:var(--text);min-height:2.4em;display:flex;align-items:center;justify-content:center;transition:opacity 0.25s}
 #story-sub{margin-top:8px;font-size:calc(clamp(12px,1.1vw,14px) * var(--text-scale));font-weight:300;color:var(--muted);line-height:1.7;min-height:3.4em;display:flex;align-items:center;justify-content:center;transition:opacity 0.25s}
@@ -177,6 +179,9 @@ body.panel-open #hero,body.panel-open #detail{opacity:0;pointer-events:none;tran
       </div>
     </div>
   </main>
+  <footer id="legal-footer">
+    <p>This organization, its activities and its employees are fictional and are not intended to represent or depict any current or former business organization or any individuals. Any resemblance to any individual or organization is purely coincidental.</p>
+  </footer>
   <div id="backdrop" onclick="closePanel()"></div>
   <div id="anchor-panel">
     <button id="panel-close" onclick="closePanel()" aria-label="Close">&times;</button>
