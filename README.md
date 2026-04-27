@@ -4,7 +4,7 @@ Interactive HTML experience for Red Hat Summit showcasing the **Connecting Model
 
 ## What It Does
 
-A pipeline animation walks through the FedAura loan-processing story across seven stages, from data ingestion to production scaling. Three **anchor stages** (AutoML, AutoRAG, Eval Hub) open a detail panel with component info and inline video demos. The remaining stages show lighter inline descriptions with optional demo links.
+A pipeline animation walks through the FedAura loan-processing story across seven stages, from data ingestion to production scaling. Three **anchor stages** (AutoML, AutoRAG, EvalHub) open a detail panel with component info and inline video demos. The remaining stages show lighter inline descriptions with optional demo links.
 
 ### The Pipeline
 
@@ -15,7 +15,7 @@ A pipeline animation walks through the FedAura loan-processing story across seve
 | Decide | **AutoML** | Anchor |
 | Explain | **AutoRAG** | Anchor |
 | Test | SDG Hub | Non-anchor |
-| Validate | **Eval Hub** | Anchor |
+| Validate | **EvalHub** | Anchor |
 | Refine | ITS Hub | Non-anchor |
 
 ## How to Use
@@ -50,7 +50,7 @@ index.html          # The entire experience: HTML, CSS, JS in one file
 videos/
   automl.mp4        # AutoML demo video
   autorag.mp4       # AutoRAG demo video
-  evalhub.mp4       # Eval Hub demo video
+  evalhub.mp4       # EvalHub demo video
   sdg.mp4           # SDG Hub demo video
   its.mp4           # ITS Hub demo video
 ```

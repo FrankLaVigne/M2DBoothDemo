@@ -265,13 +265,13 @@ substory:'Docling ingests Fed Aura\'s policy documents, loan records, and compli
    stats:['Policy-backed retrieval','Traceable citations','Multi-turn support','Compliance-ready']},
   {verb:'Test',tool:'SDG Hub',color:'#D4921E',
    storyline:'Generate the questions before customers do.',
-   substory:'SDG Hub turns Fed Aura\'s policy documents into thousands of evaluation triplets (edge cases, ambiguous clauses, adversarial prompts), ready for Eval Hub to score the RAG system against.',
+   substory:'SDG Hub turns Fed Aura\'s policy documents into thousands of evaluation triplets (edge cases, ambiguous clauses, adversarial prompts), ready for EvalHub to score the RAG system against.',
    headline:'Synthetic data. Real rigor.',
    detail:'SDG Hub takes your policy documents and decision examples, then generates thousands of test scenarios (rejection explanations, approval conditions, guidance requests, and policy edge cases), complete with expected answers for automated scoring.',
    stats:['10,000+ scenarios','4 scenario categories','Ground truth Q&A pairs','Plugs into any eval tool']},
-  {verb:'Validate',tool:'Eval Hub',color:'#34d399',
+  {verb:'Validate',tool:'EvalHub',color:'#34d399',
    storyline:'Does it hold up under scrutiny?',
-   substory:'Eval Hub runs comprehensive validation: accuracy benchmarks, adversarial probes, groundedness scoring. Does the system hallucinate? Can it be manipulated? Every claim is measured before a single customer sees it.',
+   substory:'EvalHub runs comprehensive validation: accuracy benchmarks, adversarial probes, groundedness scoring. Does the system hallucinate? Can it be manipulated? Every claim is measured before a single customer sees it.',
    headline:'Evaluate any AI system. Benchmark what matters. Prove it in production.',
    detail:'EvalHub is Red Hat’s unified, framework-agnostic AI evaluation platform for models, RAG pipelines, agents, and full AI applications. It replaces fragmented tooling with a single control plane that orchestrates any evaluation framework so teams benchmark performance, safety, and risk against criteria that actually matter to their domain.',
    stats:['Accuracy benchmarking','Adversarial probing','Groundedness scoring','Validation report before launch']},
@@ -296,7 +296,7 @@ const COMPONENTS=[
       'Connects to databases, SharePoint, Confluence, and more'
     ],
     demoUrl:null, demoLabel:null, demoStatus:'coming-soon',
-    relationships:['Feeds structured data into AutoRAG','Produces training-ready datasets for SDG Hub and Training Hub','Prepares evaluation corpora for Eval Hub']
+    relationships:['Feeds structured data into AutoRAG','Produces training-ready datasets for SDG Hub and Training Hub','Prepares evaluation corpora for EvalHub']
   },
   {
     id:6, slug:'training', title:'Training Hub', subtitle:'Post-Training Domain Customization',
@@ -311,7 +311,7 @@ const COMPONENTS=[
       'Distributed training via Kubeflow Trainer v2'
     ],
     demoUrl:null, demoLabel:null, demoStatus:'coming-soon',
-    relationships:['Consumes synthetic training data from SDG Hub','Trained models are validated by Eval Hub','Fine-tuned models can leverage ITS Hub for inference']
+    relationships:['Consumes synthetic training data from SDG Hub','Trained models are validated by EvalHub','Fine-tuned models can leverage ITS Hub for inference']
   },
   {
     id:2, slug:'automl', title:'AutoML', subtitle:'Automate Predictive Model Development',
@@ -329,7 +329,7 @@ const COMPONENTS=[
     videoSrc:'videos/automl.mp4',
     demoUrl:'https://drive.google.com/file/d/1AkdAIqSo-zVDOStVRNbaHpvObrVLgGiA/view',
     demoLabel:'Watch AutoML Demo', demoStatus:'video',
-    relationships:['Predictive models complement AutoRAG explanations','Trained models can be evaluated with Eval Hub','Roadmap: expose models as MCP tools for agents']
+    relationships:['Predictive models complement AutoRAG explanations','Trained models can be evaluated with EvalHub','Roadmap: expose models as MCP tools for agents']
   },
   {
     id:3, slug:'autorag', title:'AutoRAG', subtitle:'Optimize RAG Pipelines in Minutes, Not Days',
@@ -347,7 +347,7 @@ const COMPONENTS=[
     videoSrc:'videos/autorag.mp4',
     demoUrl:'https://drive.google.com/file/d/13HLxQeLyNGv8DnvuojprUEU-XXpRrkHQ/view',
     demoLabel:'Watch AutoRAG Demo', demoStatus:'video',
-    relationships:['Consumes structured data from Data Processing','RAG pipelines are scored with Eval Hub metrics','SDG Hub generates synthetic datasets for RAG testing']
+    relationships:['Consumes structured data from Data Processing','RAG pipelines are scored with EvalHub metrics','SDG Hub generates synthetic datasets for RAG testing']
   },
   {
     id:5, slug:'sdg', title:'SDG Hub', subtitle:'Synthetic Data for AI Evaluation and Training',
@@ -365,13 +365,13 @@ const COMPONENTS=[
     videoSrc:'videos/sdg.mp4',
     demoUrl:'https://drive.google.com/file/d/1LBvT1VFJg9VNzBGG-Cw_A5Eg5glotJBd/view',
     demoLabel:'Watch SDG Hub Demo', demoStatus:'video',
-    relationships:['Generates evaluation datasets consumed by Eval Hub','Produces fine-tuning data for Training Hub','Creates adversarial test sets for safety validation']
+    relationships:['Generates evaluation datasets consumed by EvalHub','Produces fine-tuning data for Training Hub','Creates adversarial test sets for safety validation']
   },
   {
-    id:4, slug:'eval', title:'Eval Hub', subtitle:'Evaluate any AI system. Benchmark what matters. Prove it in production.',
+    id:4, slug:'eval', title:'EvalHub', subtitle:'Evaluate any AI system. Benchmark what matters. Prove it in production.',
     tagline:'Comprehensive evaluation for models, RAG, and agents',
     color:'#34d399', icon:'\u{1F4CA}', isAnchor:true,
-    fedauraContext:'Before Fed Aura goes live, Eval Hub runs the full risk analysis: accuracy benchmarks, adversarial probes, groundedness scoring. Green light or red, no gray areas.',
+    fedauraContext:'Before Fed Aura goes live, EvalHub runs the full risk analysis: accuracy benchmarks, adversarial probes, groundedness scoring. Green light or red, no gray areas.',
     description:'EvalHub is Red Hat’s unified, framework-agnostic AI evaluation platform for models, RAG pipelines, agents, and full AI applications. It replaces fragmented tooling with a single control plane that orchestrates any evaluation framework so teams benchmark performance, safety, and risk against criteria that actually matter to their domain.',
     bullets:[
       '<strong>Evaluate everything:</strong> Models, RAG systems, autonomous agents, and end-to-end AI applications through one platform',
@@ -384,7 +384,7 @@ const COMPONENTS=[
     ],
     videoSrc:'videos/evalhub.mp4',
     demoUrl:'https://drive.google.com/file/d/1DxdwPRyGDUqHy5_VeFjt95pb038wTtE_/view',
-    demoLabel:'Watch Eval Hub Demo', demoStatus:'video',
+    demoLabel:'Watch EvalHub Demo', demoStatus:'video',
     relationships:['Scores and benchmarks AutoRAG pipeline configurations','Validates models produced by Training Hub and AutoML','Consumes synthetic datasets from SDG Hub']
   },
   {
@@ -402,7 +402,7 @@ const COMPONENTS=[
     videoSrc:'videos/its.mp4',
     demoUrl:'https://red.ht/its-hub-demo',
     demoLabel:'Launch ITS Hub Demo', demoStatus:'live',
-    relationships:['Enhances output quality of models from Training Hub','Improves RAG response quality with AutoRAG pipelines','Integrates with Eval Hub for evaluating scaled inference']
+    relationships:['Enhances output quality of models from Training Hub','Improves RAG response quality with AutoRAG pipelines','Integrates with EvalHub for evaluating scaled inference']
   }
 ];
 

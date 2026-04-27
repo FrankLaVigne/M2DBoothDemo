@@ -1,6 +1,6 @@
 # FedAura Booth Demo: Speaker Notes
 
-Use these talking points when walking someone through the demo. You don't need to hit every stage; find out what the visitor cares about and focus there. The three big rocks (AutoML, AutoRAG, Eval Hub) are the priority.
+Use these talking points when walking someone through the demo. You don't need to hit every stage; find out what the visitor cares about and focus there. The three big rocks (AutoML, AutoRAG, EvalHub) are the priority.
 
 **Handy to know:** the storyline, detail card, and side-panel text are selectable, so if a visitor wants a quote you can highlight and copy. The pipeline chrome (stages, buttons, chips) stays unselectable so you don't accidentally highlight it while clicking around.
 
@@ -96,19 +96,19 @@ Use these talking points when walking someone through the demo. You don't need t
 - SDG Hub is a composable Python framework for synthetic data generation.
 - Pre-built flows cover RAG evaluation, red teaming, tool calling, and knowledge tuning.
 - Native to Red Hat OpenShift AI: the same pipelines run from a workbench prototype to Kubernetes at scale.
-- In the FedAura story, SDG Hub turns Fed Aura's policy documents into thousands of evaluation triplets (edge cases, ambiguous clauses, adversarial prompts), each with a ground-truth answer so Eval Hub can score automatically.
+- In the FedAura story, SDG Hub turns Fed Aura's policy documents into thousands of evaluation triplets (edge cases, ambiguous clauses, adversarial prompts), each with a ground-truth answer so EvalHub can score automatically.
 
 **If they ask:** "Why synthetic data instead of real data?"
 > Real evaluation data is expensive and slow to create. You also can't easily generate adversarial edge cases from real data. SDG Hub lets you stress-test specifically the scenarios that matter: the weird edge cases that break systems in production.
 
 ---
 
-## Stage 6: Validate (Eval Hub): BIG ROCK
+## Stage 6: Validate (EvalHub): BIG ROCK
 
 **Story beat:** "Does it hold up under scrutiny?"
 
 **Talking points:**
-- Eval Hub is the validation control plane. It evaluates models, RAG pipelines, agents, and full applications.
+- EvalHub is the validation control plane. It evaluates models, RAG pipelines, agents, and full applications.
 - Runs accuracy benchmarks, groundedness checks, and adversarial probes.
 - Supports multiple evaluation frameworks: lm-evaluation-harness, LightEval, GuideLLM, and custom frameworks via BYOF (Bring Your Own Framework).
 - Industry-specific evaluation collections: validate against scenarios that matter to your domain.
@@ -118,10 +118,10 @@ Use these talking points when walking someone through the demo. You don't need t
 **Click the stage to open the panel.** Play the video.
 
 **If they ask:** "What makes this different from just running benchmarks?"
-> Eval Hub is an orchestration platform, not a single benchmark tool. It manages the lifecycle: scheduling evaluations, tracking results over time, comparing model versions, enforcing resource quotas. And it supports multiple backends, so you're not locked into one evaluation framework.
+> EvalHub is an orchestration platform, not a single benchmark tool. It manages the lifecycle: scheduling evaluations, tracking results over time, comparing model versions, enforcing resource quotas. And it supports multiple backends, so you're not locked into one evaluation framework.
 
 **If they ask:** "Can I bring my own evaluation logic?"
-> Yes. The BYOF (Bring Your Own Framework) SDK lets you implement a single method, package it as a container, and Eval Hub handles scheduling, status tracking, and result aggregation. It also has an MCP server so AI agents can trigger and read evaluations.
+> Yes. The BYOF (Bring Your Own Framework) SDK lets you implement a single method, package it as a container, and EvalHub handles scheduling, status tracking, and result aggregation. It also has an MCP server so AI agents can trigger and read evaluations.
 
 ---
 
@@ -144,7 +144,7 @@ Use these talking points when walking someone through the demo. You don't need t
 
 ## Closing
 
-> "That's the pipeline: from raw documents to production-ready AI, all on Red Hat OpenShift AI. The three big rocks are AutoML, AutoRAG, and Eval Hub, all available in Red Hat AI 3.4. Want to go deeper on any of these?"
+> "That's the pipeline: from raw documents to production-ready AI, all on Red Hat OpenShift AI. The three big rocks are AutoML, AutoRAG, and EvalHub, all available in Red Hat AI 3.4. Want to go deeper on any of these?"
 
 - Offer to play the video demos for whichever component they're most interested in.
 - If they want hands-on: ITS Hub has a live demo link.
@@ -161,5 +161,5 @@ Use these talking points when walking someone through the demo. You don't need t
 | **Decide** | **AutoML** | **Automated ML from your historical data** |
 | **Explain** | **AutoRAG** | **Optimized RAG pipelines in minutes** |
 | Test | SDG Hub | Synthetic data for evaluation and training |
-| **Validate** | **Eval Hub** | **Comprehensive AI validation before production** |
+| **Validate** | **EvalHub** | **Comprehensive AI validation before production** |
 | Refine | ITS Hub | Sample many answers, pick the best, at runtime |
