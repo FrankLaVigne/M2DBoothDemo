@@ -479,7 +479,7 @@ STAGES.forEach((s,i)=>{
   const el=document.createElement('div');el.className='stage';el.id=`stage-${i}`;
   if(COMPONENTS[i]&&COMPONENTS[i].isAnchor){el.setAttribute('data-anchor','true');el.style.setProperty('--sc-glow',s.color+'40');}
   el.style.setProperty('--sc',s.color);el.style.setProperty('--sg',s.color+'18');
-  el.innerHTML=`<div class="stage-ring"><div class="stage-num" style="color:${s.color}99">0${i+1}</div><div class="stage-verb">${s.verb}</div></div><div class="stage-tool">${s.tool}</div>`;
+  el.innerHTML=`<div class="stage-ring"><div class="stage-num" style="color:${s.color}99">${i+1}</div><div class="stage-verb">${s.verb}</div></div><div class="stage-tool">${s.tool}</div>`;
   el.addEventListener('click',()=>userSelect(i));stagesEl.appendChild(el);
 });
 
