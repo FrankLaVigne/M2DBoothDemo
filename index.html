@@ -13,9 +13,9 @@
 :root[data-theme="light"]{--bg:#FAFAF7;--surface:#FFFFFF;--surface2:#F1F1EC;--border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.16);--rh-red:#EE0000;--text:#1A1A1A;--muted:#6B6B66;--dim:#B5B5B0;--backdrop:rgba(0,0,0,0.35);--video-bg:#000}
 :root[data-theme="high-contrast"]{--bg:#000000;--surface:#000000;--surface2:#141414;--border:#FFFFFF;--border2:#FFFFFF;--rh-red:#FF5252;--text:#FFFFFF;--muted:#FFFFFF;--dim:#FFFFFF;--backdrop:rgba(0,0,0,0.85);--video-bg:#000}
 :root[data-theme="high-contrast"] #story-sub,:root[data-theme="high-contrast"] #detail-text,:root[data-theme="high-contrast"] #panel-desc,:root[data-theme="high-contrast"] #panel-subtitle,:root[data-theme="high-contrast"] #panel-bullets li,:root[data-theme="high-contrast"] #panel-rel-list li{font-weight:500}
-:root[data-theme="high-contrast"] .stage-num,:root[data-theme="high-contrast"] .stage-verb,:root[data-theme="high-contrast"] .stage-tool{color:var(--text)}
+:root[data-theme="high-contrast"] .stage-verb,:root[data-theme="high-contrast"] .stage-tool{color:var(--text)}
 :root[data-theme="high-contrast"] .stage.active .stage-ring{border-color:var(--text);background:#FFFFFF1F}
-:root[data-theme="high-contrast"] .stage.active .stage-num,:root[data-theme="high-contrast"] .stage.active .stage-verb,:root[data-theme="high-contrast"] .stage.active .stage-tool{color:var(--text)}
+:root[data-theme="high-contrast"] .stage.active .stage-verb,:root[data-theme="high-contrast"] .stage.active .stage-tool{color:var(--text)}
 :root[data-theme="high-contrast"] .stage.active .stage-ring::after{border-color:var(--text)}
 :root[data-theme="high-contrast"] .stage[data-anchor] .stage-ring{box-shadow:0 0 18px rgba(255,255,255,0.25)}
 :root[data-theme="high-contrast"] #panel-bullets li::before{color:var(--text)}
@@ -51,7 +51,6 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
 .stage{display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;position:relative;transition:transform 0.2s;flex-shrink:0}
 .stage:hover{transform:translateY(-3px)}.stage:active{transform:translateY(0)}
 .stage-ring{width:80px;height:80px;border-radius:50%;border:1.5px solid var(--border2);background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;position:relative;transition:border-color 0.35s,background 0.35s}
-.stage-num{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;line-height:1;transition:color 0.35s;color:var(--muted)}
 .stage-verb{font-size:13px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);transition:color 0.35s;white-space:nowrap}
 .stage-tool{font-size:12px;font-weight:600;color:var(--muted);transition:color 0.35s;text-align:center;white-space:nowrap;letter-spacing:0.02em}
 @keyframes ring-pulse{0%{transform:scale(1);opacity:0.5}100%{transform:scale(1.8);opacity:0}}
@@ -59,12 +58,11 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-fam
 .stage.active .stage-ring::after{content:'';position:absolute;inset:-1px;border-radius:50%;border:1.5px solid var(--sc);animation:ring-pulse 2s ease-out infinite}
 .stage[data-anchor].active .stage-ring::after{animation:ring-pulse-anchor 2s ease-out infinite}
 .stage[data-anchor] .stage-ring{width:100px;height:100px;border-width:2.5px;box-shadow:0 0 18px var(--sc-glow,rgba(255,255,255,0.05))}
-.stage[data-anchor] .stage-num{font-size:24px}
 .stage[data-anchor] .stage-verb{font-size:16px;font-weight:700}
 .stage:not([data-anchor]) .stage-ring{opacity:0.75}
 .stage:not([data-anchor]) .stage-tool{opacity:0.7}
 .stage.active .stage-ring{border-color:var(--sc);background:var(--sg)}
-.stage.active .stage-num,.stage.active .stage-verb,.stage.active .stage-tool{color:var(--sc)}
+.stage.active .stage-verb,.stage.active .stage-tool{color:var(--sc)}
 #detail{width:100%;max-width:960px;background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:18px 24px;display:flex;align-items:flex-start;gap:18px;opacity:0;transform:translateY(10px);transition:opacity 0.3s,transform 0.3s;pointer-events:none}
 #detail.visible{opacity:1;transform:translateY(0);pointer-events:auto}
 #detail-stripe{width:3px;align-self:stretch;border-radius:2px;flex-shrink:0;transition:background 0.35s}
@@ -479,7 +477,7 @@ STAGES.forEach((s,i)=>{
   const el=document.createElement('div');el.className='stage';el.id=`stage-${i}`;
   if(COMPONENTS[i]&&COMPONENTS[i].isAnchor){el.setAttribute('data-anchor','true');el.style.setProperty('--sc-glow',s.color+'40');}
   el.style.setProperty('--sc',s.color);el.style.setProperty('--sg',s.color+'18');
-  el.innerHTML=`<div class="stage-ring"><div class="stage-num" style="color:${s.color}99">${i+1}</div><div class="stage-verb">${s.verb}</div></div><div class="stage-tool">${s.tool}</div>`;
+  el.innerHTML=`<div class="stage-ring"><div class="stage-verb">${s.verb}</div></div><div class="stage-tool">${s.tool}</div>`;
   el.addEventListener('click',()=>userSelect(i));stagesEl.appendChild(el);
 });
 
