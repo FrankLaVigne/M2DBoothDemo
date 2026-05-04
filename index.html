@@ -270,7 +270,7 @@ substory:'Docling ingests Fed Aura\'s policy documents, loan records, and compli
   {verb:'Validate',tool:'EvalHub',color:'#34d399',
    storyline:'Does it hold up under scrutiny?',
    substory:'EvalHub runs comprehensive validation: accuracy benchmarks, adversarial probes, groundedness scoring. Does the system hallucinate? Can it be manipulated? Every claim is measured before a single customer sees it.',
-   headline:'Evaluate any AI system. Benchmark what matters. Prove it in production.',
+   headline:'Evaluate AI systems. Benchmark what matters.',
    detail:'EvalHub is Red Hat’s unified, framework-agnostic AI evaluation platform for models, RAG pipelines, agents, and full AI applications. It replaces fragmented tooling with a single control plane that orchestrates any evaluation framework so teams benchmark performance, safety, and risk against criteria that actually matter to their domain.',
    stats:['Accuracy benchmarking','Adversarial probing','Groundedness scoring','Validation report before launch']},
   {verb:'Refine',tool:'ITS',color:'#8860C8',
@@ -366,7 +366,7 @@ const COMPONENTS=[
     relationships:['Generates evaluation datasets consumed by EvalHub','Produces fine-tuning data for Training Hub','Creates adversarial test sets for safety validation']
   },
   {
-    id:4, slug:'eval', title:'EvalHub', subtitle:'Evaluate any AI system. Benchmark what matters. Prove it in production.',
+    id:4, slug:'eval', title:'EvalHub', subtitle:'Evaluate AI systems. Benchmark what matters.',
     tagline:'Comprehensive evaluation for models, RAG, and agents',
     color:'#34d399', icon:'\u{1F4CA}', isAnchor:true,
     fedauraContext:'Before Fed Aura goes live, EvalHub runs the full risk analysis: accuracy benchmarks, adversarial probes, groundedness scoring. Green light or red, no gray areas.',
