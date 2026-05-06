@@ -33,7 +33,7 @@ Use these talking points when walking someone through the demo. You don't need t
 
 ## Stage 2: Train (OpenShift AI)
 
-**Story beat:** "Teach the models your world."
+**Story beat:** "Train models on underwriting expertise, not generic data."
 
 **Talking points:**
 - Foundation models know the internet. They don't know your business.
@@ -90,13 +90,13 @@ Use these talking points when walking someone through the demo. You don't need t
 
 ## Stage 5: Test (SDG Hub)
 
-**Story beat:** "Generate the questions before customers do."
+**Story beat:** "Manual test data doesn't scale. SDG does."
 
 **Talking points:**
 - SDG Hub is a composable Python framework for synthetic data generation.
 - Pre-built flows cover RAG evaluation, red teaming, tool calling, and knowledge tuning.
 - Native to Red Hat OpenShift AI: the same pipelines run from a workbench prototype to Kubernetes at scale.
-- In the FedAura story, SDG Hub turns Fed Aura's policy documents into thousands of evaluation triplets (edge cases, ambiguous clauses, adversarial prompts), each with a ground-truth answer so EvalHub can score automatically.
+- In the FedAura story, SDG Hub turns Fed Aura's policy documents into thousands of evaluation triplets (edge cases, ambiguous clauses, adversarial prompts) to stress-test the RAG system. The same flows produce fine-tuning datasets and agent evaluation scenarios anywhere manual data creation slows the team down.
 
 **If they ask:** "Why synthetic data instead of real data?"
 > Real evaluation data is expensive and slow to create. You also can't easily generate adversarial edge cases from real data. SDG Hub lets you stress-test specifically the scenarios that matter: the weird edge cases that break systems in production.
