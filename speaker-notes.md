@@ -161,5 +161,5 @@ Use these talking points when walking someone through the demo. You don't need t
 | **Decide** | **AutoML** | **Automated ML from your historical data** |
 | **Explain** | **AutoRAG** | **Optimized RAG pipelines in minutes** |
 | Test | SDG Hub | Synthetic data for evaluation and training |
-| **Validate** | **EvalHub** | **Comprehensive AI validation before production** |
+| **Validate** | **EvalHub** | **Evaluate AI systems. Benchmark what matters.** |
 | Refine | ITS Hub | Sample many answers, pick the best, at runtime |

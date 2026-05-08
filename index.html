@@ -244,7 +244,7 @@ substory:'Docling ingests Fed Aura\'s policy documents, loan records, and compli
    detail:'Docling processes PDFs, spreadsheets, and scanned documents into structured, searchable data. Bank policy manuals, loan guidelines, and historical approval records are all ingested, organized, and ready to power every downstream model and retrieval system.',
    stats:['PDFs, tables, scans','Structured + unstructured','Metadata preserved','Feeds RAG + Training']},
   {verb:'Train',tool:'OpenShift AI',color:'#C44E9A',
-   storyline:'Train models on underwriting expertise, not generic data',
+   storyline:'Train models on underwriting expertise, not generic data.',
    substory:'Training pipelines run on OpenShift AI, fine-tuning foundation models on Fed Aura\'s own loan data, decision history, and regulatory language so they understand the business, not just the internet.',
    headline:'Models trained on your data. Not generic ones.',
    detail:'OpenShift AI runs training jobs across GPU clusters, fine-tuning foundation models on your financial data. The result: models that understand debt-to-income ratios, credit score bands, and lending regulations before they see a single customer query.',
@@ -257,7 +257,7 @@ substory:'Docling ingests Fed Aura\'s policy documents, loan records, and compli
    stats:['< 200ms inference','94.3% accuracy','12 risk tiers','Auditable decisions']},
   {verb:'Explain',tool:'AutoRAG',color:'#2EA898',
    storyline:'"Why was my application rejected?"',
-   substory:'AutoRAG creates optimized RAG pipeline which retrieves bank’s specific lending policies, the applicant’s recent financial filings, and current market news from Docling-indexed documents, combines them with the AutoML risk factors, and generates a precise, policy-grounded answer.',
+   substory:'AutoRAG creates optimized RAG pipeline which retrieves bank\'s specific lending policies, the applicant\'s recent financial filings, and current market news from Docling-indexed documents, combines them with the AutoML risk factors, and generates a precise, policy-grounded answer.',
    headline:'Grounded answers: every claim is traceable',
    detail:'AutoRAG creates an optimized RAG pipeline that connects to the document store to retrieve exact policy sections on demand. When a customer asks "Why was my debt-to-income ratio flagged?", the system returns the specific policy clause: no hallucinations, fully traceable, and ready for compliance review.',
    stats:['Policy-backed retrieval','Traceable citations','Multi-turn support','Compliance-ready']},
@@ -271,9 +271,9 @@ substory:'Docling ingests Fed Aura\'s policy documents, loan records, and compli
    storyline:'Does it hold up under scrutiny?',
    substory:'EvalHub runs comprehensive validation: accuracy benchmarks, adversarial probes, groundedness scoring. Does the system hallucinate? Can it be manipulated? Every claim is measured before a single customer sees it.',
    headline:'Evaluate AI systems. Benchmark what matters.',
-   detail:'EvalHub is Red Hat’s unified, framework-agnostic AI evaluation platform for models, RAG pipelines, agents, and full AI applications. It replaces fragmented tooling with a single control plane that orchestrates any evaluation framework so teams benchmark performance, safety, and risk against criteria that actually matter to their domain.',
+   detail:'EvalHub is Red Hat\'s unified, framework-agnostic AI evaluation platform for models, RAG pipelines, agents, and full AI applications. It replaces fragmented tooling with a single control plane that orchestrates any evaluation framework so teams benchmark performance, safety, and risk against criteria that actually matter to their domain.',
    stats:['Accuracy benchmarking','Adversarial probing','Groundedness scoring','Validation report before launch']},
-  {verb:'Refine',tool:'ITS',color:'#8860C8',
+  {verb:'Refine',tool:'ITS Hub',color:'#8860C8',
    storyline:'10,000 loan officers. Simultaneously.',
    substory:'ITS handles the surge: mortgage season, quarter-end volume, rate-change spikes. More concurrent users. Higher accuracy from fine-tuned smaller models. Lower infrastructure cost as demand grows.',
    headline:'Important decision? An army of second opinions. Simultaneously.',
@@ -370,7 +370,7 @@ const COMPONENTS=[
     tagline:'Comprehensive evaluation for models, RAG, and agents',
     color:'#34d399', icon:'\u{1F4CA}', isAnchor:true,
     fedauraContext:'Before Fed Aura goes live, EvalHub runs the full risk analysis: accuracy benchmarks, adversarial probes, groundedness scoring. Green light or red, no gray areas.',
-    description:'EvalHub is Red Hat’s unified, framework-agnostic AI evaluation platform for models, RAG pipelines, agents, and full AI applications. It replaces fragmented tooling with a single control plane that orchestrates any evaluation framework so teams benchmark performance, safety, and risk against criteria that actually matter to their domain.',
+    description:'EvalHub is Red Hat\'s unified, framework-agnostic AI evaluation platform for models, RAG pipelines, agents, and full AI applications. It replaces fragmented tooling with a single control plane that orchestrates any evaluation framework so teams benchmark performance, safety, and risk against criteria that actually matter to their domain.',
     bullets:[
       '<strong>Evaluate everything:</strong> Models, RAG systems, autonomous agents, and end-to-end AI applications through one platform',
       '<strong>Framework-agnostic by design:</strong> Orchestrate and compare results across evaluation frameworks without lock-in; add new ones through a pluggable adapter architecture',
@@ -378,7 +378,7 @@ const COMPONENTS=[
       '<strong>Domain-specific evaluation collections:</strong> Expert-curated, framework-agnostic test suites that validate AI against real-world scenarios for your industry',
       '<strong>Immutable evaluation artifacts:</strong> Every evaluation produces a tamper-proof, versioned record tied to exact configurations, data, and infrastructure, so results are reproducible, auditable, and defensible',
       '<strong>Prove compliance:</strong> Standardized reports that satisfy EU AI Act, FedRAMP, and internal governance out of the box, backed by the immutable artifacts that auditors demand',
-      '<strong>Use it your way:</strong> REST API, client SDK, CLI, and integrated UI, from a developer’s laptop to Kubernetes-orchestrated production evaluations'
+      '<strong>Use it your way:</strong> REST API, client SDK, CLI, and integrated UI, from a developer\'s laptop to Kubernetes-orchestrated production evaluations'
     ],
     videoSrc:'videos/evalhub.mp4',
     demoUrl:'https://drive.google.com/file/d/1DxdwPRyGDUqHy5_VeFjt95pb038wTtE_/view',
@@ -388,7 +388,7 @@ const COMPONENTS=[
   {
     id:7, slug:'its', title:'ITS Hub', subtitle:'Inference-Time Scaling',
     tagline:'Scale model reasoning at inference time',
-    color:'#22d3ee', icon:'\u26A1', isAnchor:false,
+    color:'#22d3ee', icon:'⚡', isAnchor:false,
     fedauraContext:'ITS handles the surge: mortgage season, quarter-end volume, rate-change spikes. 10,000 concurrent loan officers with better accuracy at lower cost.',
     description:'Enhance model output quality by applying additional compute at inference time. Instead of training larger models, ITS uses scaling algorithms to improve reasoning, accuracy, and reliability from existing models.',
     bullets:[
@@ -507,7 +507,7 @@ function setStage(idx){
     const comp=COMPONENTS[idx];
     let statsHtml=s.stats.map(st=>`<span class="stat-chip">${st}</span>`).join('');
     if(comp&&!comp.isAnchor&&comp.demoUrl&&comp.demoStatus!=='coming-soon'){
-      statsHtml+=`<a class="demo-link" href="${comp.demoUrl}" target="_blank" rel="noopener">${comp.demoLabel||'Watch Demo'} \u2192</a>`;
+      statsHtml+=`<a class="demo-link" href="${comp.demoUrl}" target="_blank" rel="noopener">${comp.demoLabel||'Watch Demo'} →</a>`;
     }
     if(comp&&comp.isAnchor){
       statsHtml+=`<button type="button" class="detail-action" onclick="openPanel(${idx})" style="background:${s.color}22;color:${s.color};border-color:${s.color}66">See it in action <span class="arrow">→</span></button>`;
